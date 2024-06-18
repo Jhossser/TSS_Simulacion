@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../css/plantilla.css">
+
+    <link rel="icon" href="../../Image/icono.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../Image/icono.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     @yield('links')
     <title>@yield('titulo')</title>
