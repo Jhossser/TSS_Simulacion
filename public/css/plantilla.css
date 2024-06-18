@@ -1,0 +1,146 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+body{
+    min-height: 100vh;
+    background-color: #f5f6f7;
+    font-family: 'roboto';
+    color: #0B2C37;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor{
+    display: flex;
+}
+
+header{
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: calc(100% - 40px);
+    padding: 20px;
+    display: flex;
+    font-size: 24px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #8EA9C4;
+    color: #194F82;
+}
+
+header i{
+    cursor: pointer;
+}
+
+.contMenu{
+    width: 80%;
+    height: 100%;
+    z-index: 1;
+    background-color: #194F82;
+    color: #ffffff;
+    display: block;
+    position: absolute;
+    left: -80%;
+    top: 0px;
+    border-bottom-right-radius: 5px;
+    z-index: 2;
+    box-shadow: 2px 2px 5px #93386475;
+    transition: all 0.2s;
+}
+
+.menu{
+    margin: 10px 0 10px 0;
+}
+
+.aparecer{
+    left: 0;
+}
+
+.menu ul{
+    font-size: 16px;
+}
+.menu ul hr{
+    background-color: #f5f6f7;
+    height: 1px;
+    z-index: 1;
+}
+
+.cabeza{
+    padding: 10px;
+}
+
+.menu ul li{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btnPrin{
+    padding: 0 10px 0 10px;
+}
+
+.menu ul li:hover{
+    background-color: #2069ad;
+}
+
+.menu ul li p{
+    color: #ffffff;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+.menu ul li a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+
+.menu ul li p i{
+    margin-right: 10px;
+}
+
+#flecha1, #flecha2{
+    transition: transform 0.5s ease;
+    font-size: 22px;
+}
+
+
+.subMenu{
+    margin-left: 27px;
+    display: none;
+}
+
+.subMenu ul {
+    width: 100%;
+}
+
+#fondoGris{
+    background-color: #98a4a777;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display:none; /*aun en investigacion, borrar el display si quieres que aparezca el mensaje*/
+}
+
+.principal{
+    padding-top: 76px;
+}
