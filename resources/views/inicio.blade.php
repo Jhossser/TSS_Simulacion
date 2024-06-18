@@ -1,3 +1,3 @@
 @extends('layout.plantilla')
 
-@section('titulo', 'Inicio')
+@section('titulo', 'Mobile Simu')

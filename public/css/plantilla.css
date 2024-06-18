@@ -112,6 +112,9 @@ header i{
 .menu ul li p i{
     margin-right: 10px;
 }
+.menu ul li a i{
+    margin-right: 10px;
+}
 
 #flecha1, #flecha2{
     transition: transform 0.5s ease;
@@ -144,3 +147,15 @@ header i{
 .principal{
     padding-top: 76px;
 }
+
+/* Imagaen */
+.imagen{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.imagen img{
+    width: 50px;
+    height: 50px;
+}
+/* termina imagen */

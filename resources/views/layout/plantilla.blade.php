@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,10 @@
                 <div class="cabeza">
                     <i class="fas fa-user"></i>
                 </div>
+                <hr>
+                <li>
+                    <a href="{{route('home')}}"><i class='fas fa-home'></i> INICIO</a>
+                </li>
                 <hr>
                 <li onclick="simu()" class="btnPrin">
                     <p><i class='fas fa-clipboard'></i> SIMULACIONES</p>
@@ -58,6 +62,9 @@
         </nav>
     </div>
     <main class="principal">
+        <div class="imagen">
+            <img src="../../Image/icono.png" alt="Icono">
+        </div>
         @yield('contenido')
     </main>
     <div id="fondoGris"></div>
