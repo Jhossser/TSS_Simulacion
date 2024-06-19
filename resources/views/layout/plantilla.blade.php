@@ -17,58 +17,62 @@
     <header>
         <i class="fas fa-bars" id="btnMenu"></i>
         <i class="fas fa-arrow-right-from-bracket"></i>
+        <div class="contMenu" id="menu">
+            <nav class="menu" >
+                <ul>
+                    <div class="cabeza">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <hr>
+                    <li>
+                        <a href="{{route('home')}}"><i class='fas fa-home'></i> INICIO</a>
+                    </li>
+                    <hr>
+                    <li onclick="simu()" class="btnPrin">
+                        <p><i class='fas fa-clipboard'></i> SIMULACIONES</p>
+                        <i class="fas fa-caret-down" id="flecha1"></i>
+                    </li>
+                    <nav class="subMenu" id="sub1">
+                        <ul>
+                            <li>
+                                <a href="{{ ('ambiente.create') }}">Estacion de servicio</a>
+                            </li>
+                            <li>
+                                <a href="{{ ('AmbientesRegistrados') }}">Cajeros</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('ej3.index') }}">Estacionamiento</a>
+                            </li>
+                            <li>
+                                <a href="{{ ('AmbientesRegistrados') }}">Transporte de productos</a>
+                            </li>
+                            <li>
+                                <a href="{{ ('AmbientesRegistrados') }}">Reparacion de maquinaria</a>
+                            </li>
+                            <li>
+                                <a href="{{ ('AmbientesRegistrados') }}">Reabastecimiento</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <hr>
+                    <li onclick="hist()" class="btnPrin">
+                        <p><i class='fas fa-clock-rotate-left'></i> HISTORIAL</p>
+                        <i class="fas fa-caret-down" id="flecha2"></i>
+                    </li>
+                    <hr>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <div class="contMenu" id="menu">
-        <nav class="menu" >
-            <ul>
-                <div class="cabeza">
-                    <i class="fas fa-user"></i>
-                </div>
-                <hr>
-                <li>
-                    <a href="{{route('home')}}"><i class='fas fa-home'></i> INICIO</a>
-                </li>
-                <hr>
-                <li onclick="simu()" class="btnPrin">
-                    <p><i class='fas fa-clipboard'></i> SIMULACIONES</p>
-                    <i class="fas fa-caret-down" id="flecha1"></i>
-                </li>
-                <nav class="subMenu" id="sub1">
-                    <ul>
-                        <li>
-                            <a href="{{ ('ambiente.create') }}">Estacion de servicio</a>
-                        </li>
-                        <li>
-                            <a href="{{ ('AmbientesRegistrados') }}">Cajeros</a>
-                        </li>
-                        <li>
-                            <a href="{{ ('AmbientesRegistrados') }}">Estacionamiento</a>
-                        </li>
-                        <li>
-                            <a href="{{ ('AmbientesRegistrados') }}">Transporte de productos</a>
-                        </li>
-                        <li>
-                            <a href="{{ ('AmbientesRegistrados') }}">Reparacion de maquinaria</a>
-                        </li>
-                        <li>
-                            <a href="{{ ('AmbientesRegistrados') }}">Reabastecimiento</a>
-                        </li>
-                    </ul>
-                </nav>
-                <hr>
-                <li onclick="hist()" class="btnPrin">
-                    <p><i class='fas fa-clock-rotate-left'></i> HISTORIAL</p>
-                    <i class="fas fa-caret-down" id="flecha2"></i>
-                </li>
-                <hr>
-            </ul>
-        </nav>
-    </div>
     <main class="principal">
         <div class="imagen">
             <img src="../../Image/icono.png" alt="Icono">
         </div>
-        @yield('contenido')
+        <div class="cont1">
+            <div class="cont2">
+                @yield('contenido')
+            </div>
+        </div>
     </main>
     <div id="fondoGris"></div>
 </body>

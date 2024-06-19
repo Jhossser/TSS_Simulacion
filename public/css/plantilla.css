@@ -36,6 +36,7 @@ header{
     align-items: center;
     background-color: #8EA9C4;
     color: #194F82;
+    z-index: 2;
 }
 
 header i{
@@ -45,15 +46,13 @@ header i{
 .contMenu{
     width: 80%;
     height: 100%;
-    z-index: 1;
     background-color: #194F82;
     color: #ffffff;
     display: block;
-    position: absolute;
+    position: fixed;
     left: -80%;
     top: 0px;
     border-bottom-right-radius: 5px;
-    z-index: 2;
     box-shadow: 2px 2px 5px #93386475;
     transition: all 0.2s;
 }
@@ -153,9 +152,24 @@ header i{
     display: flex;
     width: 100%;
     justify-content: center;
+    margin-bottom: 10px;
 }
 .imagen img{
     width: 50px;
     height: 50px;
 }
 /* termina imagen */
+
+.cont1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.cont2{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+}

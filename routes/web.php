@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ejercicio3Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('inicio');
 })->name('home');
+
+Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
+
+
