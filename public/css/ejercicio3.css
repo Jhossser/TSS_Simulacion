@@ -2,14 +2,32 @@
     width: 100%;
     height: auto;
     margin-bottom: 10px;
+    border-radius: 3px;
 }
 
-.preguntas{
-    margin: 10px 0 10px;
+.margenAbajo{
+    margin-bottom: 10px;
+    width: 100%;
 }
 
-h1{
+h1, h2{
     font-size: 20px;
     color: #194F82;
     margin-bottom: 10px;
+}
+
+h2{
+    font-size: 16px;
+}
+
+.ecuacion{
+    padding: 5px 10px 5px 10px;
+    background-color: #ffc30d65;
+    border-radius: 7px;
+    transition: all 0.2s;
+}
+
+.ecuacion:hover{
+    transform: scale(1.03);
+    background-color: #ffc30d4d;
 }

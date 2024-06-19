@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/plantilla.css">
 
     <link rel="icon" href="../../Image/icono.png" type="image/x-icon">
@@ -14,7 +15,7 @@
     <title>@yield('titulo')</title>
 </head>
 <body>
-    <header>
+    <header class="cabecera">
         <i class="fas fa-bars" id="btnMenu"></i>
         <i class="fas fa-arrow-right-from-bracket"></i>
         <div class="contMenu" id="menu">
@@ -77,6 +78,7 @@
     <div id="fondoGris"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../../js/plantilla.js"></script>
 @yield('script')
 </html>

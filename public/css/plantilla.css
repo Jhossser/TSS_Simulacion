@@ -10,6 +10,10 @@ a{
     text-decoration: none;
     color: #ffffff;
 }
+a:hover{
+    color: #ffffff;
+    text-decoration: none;
+}
 
 body{
     min-height: 100vh;
@@ -24,11 +28,11 @@ body{
     display: flex;
 }
 
-header{
-    position: fixed; /* Fija el header en la parte superior */
+.cabecera{
+    position: fixed; /* Fija el .cabecera en la parte superior */
     top: 0;
     left: 0;
-    width: calc(100% - 40px);
+    width: 100%;
     padding: 20px;
     display: flex;
     font-size: 24px;
@@ -39,7 +43,7 @@ header{
     z-index: 2;
 }
 
-header i{
+.cabecera i{
     cursor: pointer;
 }
 
@@ -72,6 +76,8 @@ header i{
     background-color: #f5f6f7;
     height: 1px;
     z-index: 1;
+    margin: 0 0 0 0;
+    border: none;
 }
 
 .cabeza{
@@ -99,6 +105,8 @@ header i{
     width: 100%;
     display: flex;
     gap: 5px;
+    margin: 0;
+    align-items: center;
 }
 .menu ul li a{
     width: 100%;
@@ -144,7 +152,7 @@ header i{
 }
 
 .principal{
-    padding-top: 76px;
+    padding-top: 85px;
 }
 
 /* Imagaen */

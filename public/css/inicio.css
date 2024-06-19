@@ -1,0 +1,34 @@
+h1{
+    font-size: 20px;
+    color: #194F82;
+}
+
+.bienvenido{
+    font-weight: bold;
+}
+
+.contBotones{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 300px;
+    width: 70%;
+    margin: 20px 0 20px 0;
+    min-width: 230px;
+}
+
+.opcion{
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #56ACE0;
+    color: #f5f6f7;
+    width: 100%;
+}
+
+.opcion:hover{
+
+}
