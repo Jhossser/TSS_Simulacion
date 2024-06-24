@@ -20,4 +20,7 @@ Route::get('/', function () {
 
 Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
 
+Route::get('/ejercicio2/index', function () {
+    return view('Ejercicio 2.index');
+})->name('home');
 
