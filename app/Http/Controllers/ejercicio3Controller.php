@@ -11,10 +11,15 @@ class ejercicio3Controller extends Controller
         $lambda = 10; // tasa de llegada (clientes por hora)
         $mu = 3; // tasa de servicio (servicios por hora)
         $cupos = 6; // capacidad del estacionamiento
-        $tiempoSimulacion = 10; // tiempo de simulación en horas
+        $tiempoSimulacion = 24; // tiempo de simulación en horas
+
+        $datosPoisson = $this->distribucionPoisson($lambda, $tiempoSimulacion);
+        $datosExponencial = [];
+        $datosUniforme = [];
+        // print_r($datosPoisson);
 
         // Variables para el resultado
-        $clientesPredidios = 0;
+        $clientesPerdidos = 0;
         $totalClientes = 0;
         $lugaresLibres = array_fill(0, $cupos, 0); // Estado del estacionamiento
         $tiempoConlugarLibre = 0;
@@ -41,15 +46,19 @@ class ejercicio3Controller extends Controller
                     for ($i = 0; $i < $cupos; $i++) {
                         if ($lugaresLibres[$i] == 0) {
                             $lugaresLibres[$i] = 1;
-                            $siguienteSalida[$i] = $tiempoActual + $this->generateUniform(10/60, 30/60); // Convertimos minutos a horas
+                            $tiempoUniforme = $this->generateUniform(10/60, 30/60);
+                            $siguienteSalida[$i] = $tiempoActual + $tiempoUniforme; // Convertimos minutos a horas
+                            $datosUniforme[] = $tiempoUniforme * 60;
                             break;
                         }
                     }
                 } else {
                     // No hay espacio disponible
-                    $clientesPredidios++;
+                    $clientesPerdidos++;
                 }
-                $siguienteLlegada = $tiempoActual + $this->generateExponential($lambda);
+                $tiempoExponencial = $this->generateExponential($lambda);
+                $siguienteLlegada = $tiempoActual + $tiempoExponencial;
+                $datosExponencial[] = $tiempoExponencial;
             } else {
                 // Salida de un cliente
                 $tiempoActual = $minDeparture;
@@ -74,11 +83,11 @@ class ejercicio3Controller extends Controller
                 'event' => $tipoEvento,
                 'available_spaces' => count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
                 'occupied_spaces' => $cupos - count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
-                'lost_customers' => $clientesPredidios
+                'lost_customers' => $clientesPerdidos
             ];
         }
 
-        $porcentajePerdidos = ($clientesPredidios / $totalClientes) * 100;
+        $porcentajePerdidos = ($clientesPerdidos / $totalClientes) * 100;
         $probabilidadEspacioLibre = $tiempoConlugarLibre / $tiempoSimulacion;
         $promedioEspaciosLibres = array_sum($lugaresLibres) / $tiempoSimulacion;
 
@@ -88,11 +97,33 @@ class ejercicio3Controller extends Controller
                 'probabilidadEspacioLibre' => $probabilidadEspacioLibre,
                 'promedioEspaciosLibres' => $promedioEspaciosLibres,
                 'iteraciones' => $iteraciones,
+                'datosPoisson' => $datosPoisson,
+                'datosExponencial' => $datosExponencial
             ]);
         }
 
-        return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones'));
+        return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones','datosPoisson','datosExponencial','datosUniforme'));
     }
+
+    //distribucion poisson
+    private function distribucionPoisson($lambda, $horas){
+        $data = [];
+        for ($k = 0; $k <= $horas; $k++) {
+            $probability = exp(-$lambda) * pow($lambda, $k) / $this->factorial($k);
+            $data[] = ['time' => $k, 'value' => $probability];
+        }
+
+        return $data;
+    }
+    private function factorial($n)
+    {
+        if ($n <= 1) {
+            return 1;
+        } else {
+            return $n * $this->factorial($n - 1);
+        }
+    }
+    //termina distribucion poisson
 
     private function generateExponential($rate)
     {
@@ -139,7 +170,7 @@ class ejercicio3Controller extends Controller
         ];
 
         // Variables para el resultado
-        $clientesPredidios = 0;
+        $clientesPerdidos = 0;
         $totalClientes = 0;
         $lugaresLibres = array_fill(0, $cupos, 0); // Estado del estacionamiento
         $tiempoConlugarLibre = 0;
@@ -172,7 +203,7 @@ class ejercicio3Controller extends Controller
                     }
                 } else {
                     // No hay espacio disponible
-                    $clientesPredidios++;
+                    $clientesPerdidos++;
                 }
                 $siguienteLlegada = $tiempoActual + $this->generateExponential($lambda);
             } else {
@@ -199,11 +230,11 @@ class ejercicio3Controller extends Controller
                 'event' => $tipoEvento,
                 'available_spaces' => count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
                 'occupied_spaces' => $cupos - count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
-                'lost_customers' => $clientesPredidios
+                'lost_customers' => $clientesPerdidos
             ];
         }
 
-        $porcentajePerdidos = ($clientesPredidios / $totalClientes) * 100;
+        $porcentajePerdidos = ($clientesPerdidos / $totalClientes) * 100;
         $probabilidadEspacioLibre = $tiempoConlugarLibre / $tiempoSimulacion;
         $promedioEspaciosLibres = array_sum($lugaresLibres) / $tiempoSimulacion;
 

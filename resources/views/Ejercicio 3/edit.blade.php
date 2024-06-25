@@ -59,7 +59,7 @@
             <h2>Tiempo de simulacion</h2>
             <p>El tiempo de simulación es la duración total durante la cual se lleva a cabo la simulación. Este tiempo se mide en minutos u horas, según el contexto.</p>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-primary">Resolver</button>
         <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej3.index')}}'">Cancelar</button>
     </form>
 @endsection

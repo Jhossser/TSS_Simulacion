@@ -47,7 +47,7 @@
             media de 10 clientes por hora, y se van inmediatamente si no existen lugares disponibles en el estacionamiento. El tiempo que un auto permanece en el estacionamiento 
             sigue una distribución uniforme entre 10 y 30 minutos.
         </p>
-        <span class="alert alert-primary"> El timpo transcurrido es de 10 horas</span>
+        <span class="alert alert-primary"> El timpo transcurrido es de 24 horas</span>
     @endif
 
     <p class="margenAbajo">
@@ -93,6 +93,13 @@
     <h1>Cantidad de Eventos</h1>
     <p id="iteraciones">{{ count($iteraciones) }}</p>
     <br>
+    
+    {{-- Grafico --}}
+    <div id="graficaEj3" style="width: 100%; height: 400px;"></div>
+    <div id="graficoExponencial" style="width: 100%; height: 400px;"></div>
+    <div id="graficoUniforme" style="width: 100%; height: 400px;"></div>
+
+    <br>
     <div class="ecuacion">
         <h1>Estadisticas</h1>
         <p id="porcentajePerdidos">Porcentaje de Clientes perdidos: {{ $porcentajePerdidos }}%</p>
@@ -115,5 +122,14 @@
 @section('script')
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script
+    type="text/javascript"
+    src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
+    ></script>
+    <script>
+        const datosPoisson = @json($datosPoisson);
+        const datosExponencial = @json($datosExponencial);
+        const datosUniforme = @json($datosUniforme);
+    </script>
     <script src="../../js/ej3.js"></script>
 @endsection
