@@ -98,7 +98,8 @@ class ejercicio3Controller extends Controller
                 'promedioEspaciosLibres' => $promedioEspaciosLibres,
                 'iteraciones' => $iteraciones,
                 'datosPoisson' => $datosPoisson,
-                'datosExponencial' => $datosExponencial
+                'datosExponencial' => $datosExponencial,
+                'datosUniforme' => $datosUniforme
             ]);
         }
 

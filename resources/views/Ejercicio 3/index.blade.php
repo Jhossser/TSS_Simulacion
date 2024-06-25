@@ -95,9 +95,9 @@
     <br>
     
     {{-- Grafico --}}
-    <div id="graficaEj3" style="width: 100%; height: 400px;"></div>
-    <div id="graficoExponencial" style="width: 100%; height: 400px;"></div>
-    <div id="graficoUniforme" style="width: 100%; height: 400px;"></div>
+    <canvas id="graficoPoisson" width="400" height="200"></canvas>
+    <canvas id="graficoExponencial" width="400" height="200" style="margin-top: 20px;"></canvas>
+    <canvas id="graficoUniforme" width="400" height="200" style="margin-top: 20px;"></canvas>
 
     <br>
     <div class="ecuacion">
@@ -122,10 +122,7 @@
 @section('script')
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script
-    type="text/javascript"
-    src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
     <script>
         const datosPoisson = @json($datosPoisson);
         const datosExponencial = @json($datosExponencial);

@@ -14,65 +14,130 @@ function masInfo(){
     }
 }
 
-//grafico poisson
-const chart = LightweightCharts.createChart(document.getElementById('graficaEj3'), {
-    
-    layout: {
-        backgroundColor: '#ffffff',
-        textColor: '#000000',
+//graficos
+const ctxPoisson = document.getElementById('graficoPoisson');
+const ctxExponential = document.getElementById('graficoExponencial');
+const ctxUniform = document.getElementById('graficoUniforme');
+
+//poisson
+let poissonChart = new Chart(ctxPoisson, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Ocupación del Estacionamiento',
+            data: [],
+            borderColor: 'rgba(33, 150, 243, 1)',
+            borderWidth: 2,
+            fill: false
+        }]
     },
-    grid: {
-        vertLines: {
-            color: '#e0e0e0',
-        },
-        horzLines: {
-            color: '#e0e0e0',
-        },
-    },
-    
-    timeScale: {
-        timeVisible: false,
-        secondsVisible: true,
-    },
+    options: {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Iteración'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Espacios Ocupados'
+                }
+            }
+        }
+    }
 });
+//termina poisson
 
-const lineSeries = chart.addLineSeries({
-    color: '#2196F3',
-    lineWidth: 2,
+//exponencial
+let exponentialChart = new Chart(ctxExponential, {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Tiempos Exponenciales (minutos)',
+            data: [],
+            backgroundColor: 'rgba(255, 87, 51, 0.6)',
+            borderColor: 'rgba(255, 87, 51, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Iteración'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tiempo (minutos)'
+                }
+            }
+        }
+    }
 });
+//termina exponenecial
 
-const chartData = datosPoisson.map(point => ({ time: point.time + 1, value: point.value }));
+//uniforme
+let uniformChart = new Chart(ctxUniform, {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Tiempos Uniformes (minutos)',
+            data: [],
+            backgroundColor: 'rgba(139, 195, 74, 0.6)',
+            borderColor: 'rgba(139, 195, 74, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Iteración'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tiempo (minutos)'
+                }
+            }
+        }
+    }
+});
+//termina uniforme
 
-lineSeries.setData(chartData);
+updateCharts(datosPoisson, datosExponencial, datosUniforme);
 
-chart.timeScale().fitContent();
-//termina grafico poisson
+function updateCharts(iterations, exponentialTimes, uniformTimes) {
+    const poissonLabels = iterations.map(item => item.time);
+    const poissonData = iterations.map(item => item.value);
+    console.log(poissonData);
 
-//grafico exponencial
-const chartOptions = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
-const chart2 = LightweightCharts.createChart(document.getElementById('graficoExponencial'), chartOptions);
-const areaSeries = chart2.addAreaSeries({ lineColor: '#2962FF', topColor: '#2962FF', bottomColor: 'rgba(41, 98, 255, 0.28)' });
+    poissonChart.data.labels = poissonLabels;
+    poissonChart.data.datasets[0].data = poissonData;
+    poissonChart.update();
 
-const exponentialData = datosExponencial.map((time, index) => ({ value: time, time: index + 1 }));
-// console.log(exponentialData);
+    const exponentialLabels = exponentialTimes.map((_, index) => index + 1);
+    const uniformLabels = uniformTimes.map((_, index) => index + 1);
 
-areaSeries.setData(exponentialData);
+    exponentialChart.data.labels = exponentialLabels;
+    exponentialChart.data.datasets[0].data = exponentialTimes;
+    exponentialChart.update();
 
-chart2.timeScale().fitContent();
-//termina grafico exponencial
-
-//grafico uniforme
-const chartOptions3 = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
-const chart3 = LightweightCharts.createChart(document.getElementById('graficoUniforme'), chartOptions);
-const areaSeries3 = chart3.addAreaSeries({ lineColor: '#FF5733', topColor: '#FF5733', bottomColor: 'rgba(41, 98, 255, 0.28)' });
-
-const uniformData = datosUniforme.map((time, index) => ({ value: time, time: index }));
-console.log(uniformData);
-
-areaSeries3.setData(uniformData);
-
-chart3.timeScale().fitContent();
-//termina grafico uniforme
+    uniformChart.data.labels = uniformLabels;
+    uniformChart.data.datasets[0].data = uniformTimes;
+    uniformChart.update();
+}
+//termina graficos
 
 function rehacer(){
     $.ajax({
@@ -97,10 +162,8 @@ function rehacer(){
             });
 
             $('#tablaIteracion').html(tableBody);
-            lineSeries.setData(response.datosPoisson);
             
-            const exponentialData2 = response.datosExponencial.map((time, index) => ({ value: time, time: index }));
-            areaSeries.setData(exponentialData2);
+            updateCharts(response.datosPoisson, response.datosExponencial, response.datosUniforme);
         },
         error: function() {
             alert('Failed to run the simulation.');
