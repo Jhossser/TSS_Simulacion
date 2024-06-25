@@ -1,17 +1,17 @@
 @extends('layout.plantilla')
 
 @section('links')
-    <link rel="stylesheet" href="../../css/ejercicio3.css">
+    <link rel="stylesheet" href="../../css/ejercicio4.css">
 @endsection
 
-@section('titulo', 'Ejercicio 3')
+@section('titulo', 'Reaparacion Maquinaria')
 
 @section('contenido')
-    <h1>Problema de Estacionamiento</h1>
-    <img class="imgEst" src="../../Image/estacionamiento.jpg" alt="foto estacionamiento">
+    <h1>Problema de Reparacion de maquinaria</h1>
+    <img class="imgEst" src="../../Image/reparacionMaquinaria.jpg" alt="foto estacionamiento">
     
     @if (isset($datos))
-        <p class="margenAbajo" style="text-align: justify;">
+        {{-- <p class="margenAbajo" style="text-align: justify;">
             Una tienda pequeña tiene un lote de estacionamiento con {{$datos['c']}} lugares disponibles. Los clientes llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón 
             media de {{$datos['tl']}} clientes por hora, y se van inmediatamente si no existen lugares disponibles en el estacionamiento. El tiempo que un auto permanece en el estacionamiento 
             sigue una distribución uniforme con una tasa de servicio de {{$datos['ts']}}.
@@ -40,23 +40,100 @@
                 <label for="tiempo">Tiempo de simulacion</label>
                 <input class="form-control" type="number" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo en horas" value="{{$datos['tiempo']}}">
             </div>
-        </form>
+        </form> --}}
     @else
         <p class="margenAbajo" style="text-align: justify;">
-            Una tienda pequeña tiene un lote de estacionamiento con 6 lugares disponibles. Los clientes llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón 
-            media de 10 clientes por hora, y se van inmediatamente si no existen lugares disponibles en el estacionamiento. El tiempo que un auto permanece en el estacionamiento 
-            sigue una distribución uniforme entre 10 y 30 minutos.
+            Una cierta compañía posee un gran número de máquinas en uso. El tiempo que dura en operación
+            cada una de estas máquinas, sigue la siguiente distribuci6n de probabilidad:
         </p>
-        <span class="alert alert-primary"> El timpo transcurrido es de 24 horas</span>
+        
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tiempo entre descomposturas (horas)</th>
+                        <th>Probabilidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaIteracion">
+                        <tr>
+                            <td>6 - 8</td>
+                            <td>0.10</td>
+                        </tr>
+                        <tr>
+                            <td>8 - 10</td>
+                            <td>0.15</td>
+                        </tr>
+                        <tr>
+                            <td>10 - 12</td>
+                            <td>0.24</td>
+                        </tr>
+                        <tr>
+                            <td>12 - 14</td>
+                            <td>0.26</td>
+                        </tr>
+                        <tr>
+                            <td>16 - 18</td>
+                            <td>0.18</td>
+                        </tr>
+                        <tr>
+                            <td>18 - 20</td>
+                            <td>0.07</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p>
+            El tiempo que un operador se tarda en reparar una máquina, sigue la siguiente distribución de
+            probabilidad:
+        </p>
+        
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tiempo de reparacion (horas)</th>
+                        <th>Probabilidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaIteracion">
+                        <tr>
+                            <td>2 - 4</td>
+                            <td>0.15</td>
+                        </tr>
+                        <tr>
+                            <td>4 - 6</td>
+                            <td>0.25</td>
+                        </tr>
+                        <tr>
+                            <td>6 - 8</td>
+                            <td>0.30</td>
+                        </tr>
+                        <tr>
+                            <td>8 - 10</td>
+                            <td>0.20</td>
+                        </tr>
+                        <tr>
+                            <td>10 - 12</td>
+                            <td>0.10</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            El costo de tener una maquina ociosa durante una hora es de $500, y el salario por hora para este
+            tipo de operarios es de $50.
+        </p>
+        <span class="alert alert-primary"> Info de Ej6s</span>
     @endif
 
     <p class="margenAbajo">
-        a) ¿Qué porcentaje de los clientes es perdido por no tener más lugares disponibles?<br>
-        b) ¿Cuál es la probabilidad de encontrar un lugar disponible en el estacionamiento?<br>
-        c) ¿Cuál es el porcentaje promedio de espacios disponibles? 
+        a) ¿Cuantas maquinas se deben asignar a cada mecánico para que las
+        atienda?
     </p>
     <br>
-    <div class="margenAbajo">
+    {{-- <div class="margenAbajo">
         <h1>Proceso de Llegada de Clientes</h1>
         <p style="text-align: justify;">
             Los clientes llegan según un proceso de Poisson con una tasa media de 10 clientes por hora. La distribución de Poisson describe el número de eventos que ocurren
@@ -123,13 +200,9 @@
     <p>$$F(x) = -\frac{\log(1 - \lambda)}{k} $$</p>
 @endsection
 
-@section('script') 
+@section('script')  
     <script>
-        const datosPoisson = @json($datosPoisson);
-        const datosExponencial = @json($datosExponencial);
-        const datosUniforme = @json($datosUniforme);
-
-        console.log(datosUniforme);
+        
     </script>
-    <script src="../../js/ej3.js"></script>
+    <script src="../../js/ej6.js"></script>
 @endsection

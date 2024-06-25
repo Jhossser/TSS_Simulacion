@@ -1,24 +1,8 @@
-.imgEst{
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 3px;
-}
+
 
 .margenAbajo{
     margin-bottom: 10px;
     width: 100%;
-}
-
-h1, h2{
-    font-size: 20px;
-    color: #194F82;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-h2{
-    font-size: 16px;
 }
 
 .ecuacion{
