@@ -25,7 +25,7 @@ let poissonChart = new Chart(ctxPoisson, {
     data: {
         labels: [],
         datasets: [{
-            label: 'Ocupación del Estacionamiento',
+            label: 'Autos por hora',
             data: [],
             borderColor: 'rgba(33, 150, 243, 1)',
             borderWidth: 2,
@@ -37,13 +37,13 @@ let poissonChart = new Chart(ctxPoisson, {
             x: {
                 title: {
                     display: true,
-                    text: 'Iteración'
+                    text: 'Autos'
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Espacios Ocupados'
+                    text: 'Probabilidad'
                 }
             }
         }
@@ -53,7 +53,7 @@ let poissonChart = new Chart(ctxPoisson, {
 
 //exponencial
 let exponentialChart = new Chart(ctxExponential, {
-    type: 'bar',
+    type: 'scatter',
     data: {
         labels: [],
         datasets: [{
@@ -69,13 +69,13 @@ let exponentialChart = new Chart(ctxExponential, {
             x: {
                 title: {
                     display: true,
-                    text: 'Iteración'
+                    text: 'Tiempo (minutos)'
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Tiempo (minutos)'
+                    text: 'Iteración'
                 }
             }
         }
@@ -101,18 +101,27 @@ let uniformChart = new Chart(ctxUniform, {
             x: {
                 title: {
                     display: true,
-                    text: 'Iteración'
+                    text: 'Tiempo (minutos)'
+                },
+                ticks: {
+                    callback: function(value) {
+                        return value.toFixed(5); // Formato a 4 decimales
+                    }
                 }
             },
             y: {
                 title: {
                     display: true,
-                    text: 'Tiempo (minutos)'
+                    text: 'Iteración'
                 }
             }
+        },
+        layout:{
+            autoPadding:false
         }
     }
 });
+
 //termina uniforme
 
 updateCharts(datosPoisson, datosExponencial, datosUniforme);
@@ -120,24 +129,32 @@ updateCharts(datosPoisson, datosExponencial, datosUniforme);
 function updateCharts(iterations, exponentialTimes, uniformTimes) {
     const poissonLabels = iterations.map(item => item.time);
     const poissonData = iterations.map(item => item.value);
+    const exponentialLabels = exponentialTimes.map(item => item.numAleatorio);
+    const exponentialData = exponentialTimes.map(item => item.valor);
     console.log(poissonData);
 
     poissonChart.data.labels = poissonLabels;
     poissonChart.data.datasets[0].data = poissonData;
     poissonChart.update();
 
-    const exponentialLabels = exponentialTimes.map((_, index) => index + 1);
+    //const exponentialLabels = exponentialTimes.map((_, index) => index + 1);
     const uniformLabels = uniformTimes.map((_, index) => index + 1);
 
-    exponentialChart.data.labels = exponentialLabels;
-    exponentialChart.data.datasets[0].data = exponentialTimes;
+    exponentialChart.data.labels = exponentialData;
+    exponentialChart.data.datasets[0].data = exponentialLabels;
     exponentialChart.update();
 
-    uniformChart.data.labels = uniformLabels;
-    uniformChart.data.datasets[0].data = uniformTimes;
+    uniformChart.data.labels = uniformTimes;
+    uniformChart.data.datasets[0].data = uniformLabels;
     uniformChart.update();
 }
 //termina graficos
+
+
+
+
+
+
 
 function rehacer(){
     $.ajax({
@@ -197,6 +214,8 @@ function rehacerDatos(){
             });
 
             $('#tablaIteracion').html(tableBody);
+
+            updateCharts(response.datosPoisson, response.datosExponencial, response.datosUniforme);
             
         },
         error: function() {

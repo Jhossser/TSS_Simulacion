@@ -58,7 +58,7 @@ class ejercicio3Controller extends Controller
                 }
                 $tiempoExponencial = $this->generateExponential($lambda);
                 $siguienteLlegada = $tiempoActual + $tiempoExponencial;
-                $datosExponencial[] = $tiempoExponencial;
+                $datosExponencial[] = $this->generateExponentialGrafico($lambda);  
             } else {
                 // Salida de un cliente
                 $tiempoActual = $minDeparture;
@@ -79,7 +79,7 @@ class ejercicio3Controller extends Controller
 
             // Almacenar datos de la iteración
             $iteraciones[] = [
-                'time' => $tiempoActual,
+                'time' => $tiempoActual*60,
                 'event' => $tipoEvento,
                 'available_spaces' => count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
                 'occupied_spaces' => $cupos - count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
@@ -103,6 +103,7 @@ class ejercicio3Controller extends Controller
             ]);
         }
 
+        //print_r($datosExponencial);
         return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones','datosPoisson','datosExponencial','datosUniforme'));
     }
 
@@ -131,6 +132,15 @@ class ejercicio3Controller extends Controller
         $u = mt_rand() / mt_getrandmax();
         return -log(1 - $u) / $rate;
     }
+
+    //para grafico
+    private function generateExponentialGrafico($rate)
+    {
+        $u = mt_rand() / mt_getrandmax();
+        $valorExp = -log(1 - $u) / $rate;
+        return ['numAleatorio' => $u, 'valor' => $valorExp];
+    }
+    //termina para grafico
 
     private function generateUniform($a, $b)
     {
@@ -170,6 +180,11 @@ class ejercicio3Controller extends Controller
             'tiempo' => $tiempoSimulacion
         ];
 
+        $datosPoisson = $this->distribucionPoisson($lambda, $tiempoSimulacion);
+        $datosExponencial = [];
+        $datosUniforme = [];
+        // print_r($datosPoisson);
+
         // Variables para el resultado
         $clientesPerdidos = 0;
         $totalClientes = 0;
@@ -198,7 +213,9 @@ class ejercicio3Controller extends Controller
                     for ($i = 0; $i < $cupos; $i++) {
                         if ($lugaresLibres[$i] == 0) {
                             $lugaresLibres[$i] = 1;
-                            $siguienteSalida[$i] = $tiempoActual + $this->generateUniform(10/60, 30/60); // Convertimos minutos a horas
+                            $tiempoUniforme = $this->generateUniform(10/60, 30/60);
+                            $siguienteSalida[$i] = $tiempoActual + $tiempoUniforme; // Convertimos minutos a horas
+                            $datosUniforme[] = $tiempoUniforme * 60;
                             break;
                         }
                     }
@@ -206,7 +223,9 @@ class ejercicio3Controller extends Controller
                     // No hay espacio disponible
                     $clientesPerdidos++;
                 }
-                $siguienteLlegada = $tiempoActual + $this->generateExponential($lambda);
+                $tiempoExponencial = $this->generateExponential($lambda);
+                $siguienteLlegada = $tiempoActual + $tiempoExponencial;
+                $datosExponencial[] = $this->generateExponentialGrafico($lambda);  
             } else {
                 // Salida de un cliente
                 $tiempoActual = $minDeparture;
@@ -227,7 +246,7 @@ class ejercicio3Controller extends Controller
 
             // Almacenar datos de la iteración
             $iteraciones[] = [
-                'time' => $tiempoActual,
+                'time' => $tiempoActual*60,
                 'event' => $tipoEvento,
                 'available_spaces' => count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
                 'occupied_spaces' => $cupos - count(array_filter($lugaresLibres, function($val) { return $val == 0; })),
@@ -245,10 +264,13 @@ class ejercicio3Controller extends Controller
                 'probabilidadEspacioLibre' => $probabilidadEspacioLibre,
                 'promedioEspaciosLibres' => $promedioEspaciosLibres,
                 'iteraciones' => $iteraciones,
+                'datosPoisson' => $datosPoisson,
+                'datosExponencial' => $datosExponencial,
+                'datosUniforme' => $datosUniforme
             ]);
         }
 
-        return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones'))->with('datos', $datos);              
+        return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones','datosPoisson','datosExponencial','datosUniforme'))->with('datos', $datos);              
     }
 }
 

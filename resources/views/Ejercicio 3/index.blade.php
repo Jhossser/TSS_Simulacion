@@ -69,7 +69,7 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Tiempo(horas)</th>
+                    <th>Tiempo(minutos)</th>
                     <th>Evento</th>
                     <th>Espacios Libres</th>
                     <th>Espacios Ocupados</th>
@@ -93,19 +93,23 @@
     <h1>Cantidad de Eventos</h1>
     <p id="iteraciones">{{ count($iteraciones) }}</p>
     <br>
-    
-    {{-- Grafico --}}
-    <canvas id="graficoPoisson" width="400" height="200"></canvas>
-    <canvas id="graficoExponencial" width="400" height="200" style="margin-top: 20px;"></canvas>
-    <canvas id="graficoUniforme" width="400" height="200" style="margin-top: 20px;"></canvas>
-
-    <br>
     <div class="ecuacion">
         <h1>Estadisticas</h1>
         <p id="porcentajePerdidos">Porcentaje de Clientes perdidos: {{ $porcentajePerdidos }}%</p>
         <p id="probabilidadEspacioLibre">Probabilidad de encontrar espacio: {{$probabilidadEspacioLibre}}</p>
         <p id="promedioEspaciosLibres">Promedio de espacios libres: {{ $promedioEspaciosLibres }}</p>
     </div>
+    
+    {{-- Grafico --}}
+    <br>
+    <h1>Grafico distribucion poisson</h1>
+    <canvas id="graficoPoisson" width="150" height="200"></canvas>
+    <h1>Grafico distribucion exponencial</h1>
+    <canvas id="graficoExponencial" width="150" height="200" style="margin-top: 20px;"></canvas>
+    <h1>Grafico distribucion uniforme</h1>
+    <canvas id="graficoUniforme" width="150" height="200" style="margin-top: 20px;"></canvas>
+
+    <br>
     <div class="botones">
         <a href="{{route('ej3.edit')}}" class="btn btn-primary">Personalizar problema</a>
         @if (isset($datos))
@@ -127,6 +131,8 @@
         const datosPoisson = @json($datosPoisson);
         const datosExponencial = @json($datosExponencial);
         const datosUniforme = @json($datosUniforme);
+
+        console.log(datosUniforme);
     </script>
     <script src="../../js/ej3.js"></script>
 @endsection
