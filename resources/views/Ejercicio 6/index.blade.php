@@ -1,17 +1,17 @@
 @extends('layout.plantilla')
 
 @section('links')
-    <link rel="stylesheet" href="../../css/ejercicio3.css">
+    <link rel="stylesheet" href="../../css/ejercicio6.css">
 @endsection
 
-@section('titulo', 'Ejercicio 3')
+@section('titulo', 'Reabastecimiento')
 
 @section('contenido')
-    <h1>Problema de Estacionamiento</h1>
-    <img class="imgEst" src="../../Image/estacionamiento.jpg" alt="foto estacionamiento">
+    <h1>Problema de Reabastecimiento</h1>
+    <img class="imgEst" src="../../Image/reabastecimiento.jpg" alt="foto estacionamiento">
     
     @if (isset($datos))
-        <p class="margenAbajo" style="text-align: justify;">
+        {{-- <p class="margenAbajo" style="text-align: justify;">
             Una tienda pequeña tiene un lote de estacionamiento con {{$datos['c']}} lugares disponibles. Los clientes llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón 
             media de {{$datos['tl']}} clientes por hora, y se van inmediatamente si no existen lugares disponibles en el estacionamiento. El tiempo que un auto permanece en el estacionamiento 
             sigue una distribución uniforme con una tasa de servicio de {{$datos['ts']}}.
@@ -40,23 +40,29 @@
                 <label for="tiempo">Tiempo de simulacion</label>
                 <input class="form-control" type="number" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo en horas" value="{{$datos['tiempo']}}">
             </div>
-        </form>
+        </form> --}}
     @else
         <p class="margenAbajo" style="text-align: justify;">
-            Una tienda pequeña tiene un lote de estacionamiento con 6 lugares disponibles. Los clientes llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón 
-            media de 10 clientes por hora, y se van inmediatamente si no existen lugares disponibles en el estacionamiento. El tiempo que un auto permanece en el estacionamiento 
-            sigue una distribución uniforme entre 10 y 30 minutos.
+            Una cadena de supermercados es abastecida por un almacén central. La mercancía que llega a
+            este almacén es descargada en turnos nocturnos. Los camiones que se descargan en este almacén
+            llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón media de 2 camiones por
+            hora. El tiempo que un equipo de tres trabajadores se tarda en descargar un camión, sigue una
+            distribución uniforme entre 20 y 30 minutos. Si el número de trabajadores en el equipo se
+            incrementa, entonces, la razón de servicio se incrementa. Por ejemplo, si el equipo está formado
+            por 4 trabajadores, el tiempo de servicio esta uniformemente distribuido entre 15 y 25 minutos; si
+            el equipo está formado por 5 trabajadores, el tiempo de servicio esta uniformemente distribuido
+            entre 10 y 20 minutos y si el equipo está formado por 6 trabajadores, el tiempo de servicio esta
+            uniformemente distribuido entre 5 y 15 minutos. Cada trabajador recibe $25 por hora durante el
+            turno nocturno de ocho horas. El costo de tener un camión esperando se estima en $50 por hora.
         </p>
-        <span class="alert alert-primary"> El timpo transcurrido es de 24 horas</span>
+        <span class="alert alert-primary"> Info de Ej6s</span>
     @endif
 
     <p class="margenAbajo">
-        a) ¿Qué porcentaje de los clientes es perdido por no tener más lugares disponibles?<br>
-        b) ¿Cuál es la probabilidad de encontrar un lugar disponible en el estacionamiento?<br>
-        c) ¿Cuál es el porcentaje promedio de espacios disponibles? 
+        a) ¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo?
     </p>
     <br>
-    <div class="margenAbajo">
+    {{-- <div class="margenAbajo">
         <h1>Proceso de Llegada de Clientes</h1>
         <p style="text-align: justify;">
             Los clientes llegan según un proceso de Poisson con una tasa media de 10 clientes por hora. La distribución de Poisson describe el número de eventos que ocurren
@@ -123,13 +129,9 @@
     <p>$$F(x) = -\frac{\log(1 - \lambda)}{k} $$</p>
 @endsection
 
-@section('script') 
+@section('script')  
     <script>
-        const datosPoisson = @json($datosPoisson);
-        const datosExponencial = @json($datosExponencial);
-        const datosUniforme = @json($datosUniforme);
-
-        console.log(datosUniforme);
+        
     </script>
-    <script src="../../js/ej3.js"></script>
+    <script src="../../js/ej6.js"></script>
 @endsection

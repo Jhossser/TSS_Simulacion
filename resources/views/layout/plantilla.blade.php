@@ -45,13 +45,13 @@
                                 <a href="{{ route('ej3.index') }}">Estacionamiento</a>
                             </li>
                             <li>
-                                <a href="{{ ('AmbientesRegistrados') }}">Transporte de productos</a>
+                                <a href="{{ route('ej4.index') }}">Transporte de productos</a>
                             </li>
                             <li>
-                                <a href="{{ ('AmbientesRegistrados') }}">Reparacion de maquinaria</a>
+                                <a href="{{ route('ej5.index') }}">Reparacion de maquinaria</a>
                             </li>
                             <li>
-                                <a href="{{ ('AmbientesRegistrados') }}">Reabastecimiento</a>
+                                <a href="{{ route('ej6.index') }}">Reabastecimiento</a>
                             </li>
                         </ul>
                     </nav>
@@ -79,6 +79,9 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
 <script src="../../js/plantilla.js"></script>
 @yield('script')
 </html>

@@ -40,7 +40,7 @@ body{
     align-items: center;
     background-color: #8EA9C4;
     color: #194F82;
-    z-index: 2;
+    z-index: 3;
 }
 
 .cabecera i{
@@ -181,3 +181,22 @@ body{
     align-items: center;
     max-width: 700px;
 }
+
+/* Estandar de H1 y h2, imagen*/
+h1, h2{
+    font-size: 20px;
+    color: #194F82;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+h2{
+    font-size: 16px;
+}
+.imgEst{
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+/* Termina estandar de h1 h2, imagen */

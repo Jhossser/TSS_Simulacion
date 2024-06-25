@@ -1,23 +1,8 @@
-.imgEst{
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 3px;
-}
+
 
 .margenAbajo{
     margin-bottom: 10px;
     width: 100%;
-}
-
-h1, h2{
-    font-size: 20px;
-    color: #194F82;
-    margin-bottom: 10px;
-}
-
-h2{
-    font-size: 16px;
 }
 
 .ecuacion{
@@ -30,4 +15,64 @@ h2{
 .ecuacion:hover{
     transform: scale(1.03);
     background-color: #ffc30d4d;
+}
+
+/* tabla */
+.table-responsive{
+    height: 600px;
+}
+/* termina tabla */
+
+.botones{
+    margin: 15px 0 15px 0;
+}
+.botones a{
+    background-color: #56ACE0;
+    border-radius: 5px;
+    color: #f5f6f7;
+    padding: 5px 10px 5px 10px;
+    transition: all 0.2s;
+}
+.botones a:hover{
+    background-color: #4f9dcd;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.formEj3{
+    width: 100%;
+}
+
+.formEj3 label{
+    color: #194F82;
+}
+
+#masInfo{
+    cursor: pointer;
+    color: #56ACE0;
+    display: flex;
+}
+
+#masInfo i{
+    font-size: 18px;
+}
+
+#masInfo p{
+    height: 20px;
+    margin: 0;
+    
+}
+#masInfo p:hover{
+    border-bottom: solid 1.5px #56ACE0;
+}
+
+#informacion{
+    display: none;
+}
+
+#flechaInfo{
+    transition: transform 0.5s ease;
 }
