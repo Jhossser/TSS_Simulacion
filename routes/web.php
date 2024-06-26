@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ejercicio1Controller;
+use App\Http\Controllers\ejercicio2Controller;
 use App\Http\Controllers\ejercicio3Controller;
 use App\Http\Controllers\ejercicio4Controller;
 use App\Http\Controllers\ejercicio5Controller;
@@ -26,6 +27,10 @@ Route::get('/ejercicio1/index',[Ejercicio1Controller::class, 'index'])->name('ej
 Route::get('/ejercicio1/edit', function () {
     return view('Ejercicio 1.edit');
 })->name('ej1.edit');
+
+
+Route::get('/ejercicio2/index',[ejercicio2Controller::class, 'index'])->name('ej2.index');
+Route::get('/ejercicio2/edit',[ejercicio2Controller::class, 'edit'])->name('ej2.edit');
 
 Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
 Route::get('/ejercicio3/edit',[ejercicio3Controller::class, 'edit'])->name('ej3.edit');

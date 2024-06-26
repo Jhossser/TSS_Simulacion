@@ -1,5 +1,15 @@
-function rehacer() {
-    // Aquí defines la lógica para la simulación nuevamente
-    // Puede ser una llamada a la misma ruta con un parámetro adicional para indicar que se rehace
-    window.location.reload(); // Simplemente recarga la página, pero puedes personalizarlo
+function masInfo(){
+    if($('#flechaInfo').css('transform') === 'none'){
+        $('#flechaInfo').css('transform', 'rotate(180deg)');
+    }else{
+        $('#flechaInfo').css('transform', 'none');
+    }
+    
+    $lista = $('#informacion');
+
+    if ($lista.is(':visible')) {
+        $lista.slideUp();
+    } else {
+        $lista.slideDown();
+    }
 }
