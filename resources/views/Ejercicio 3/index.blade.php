@@ -96,7 +96,7 @@
     <div class="ecuacion">
         <h1>Estadisticas</h1>
         <p id="porcentajePerdidos">Porcentaje de Clientes perdidos: {{ $porcentajePerdidos }}%</p>
-        <p id="probabilidadEspacioLibre">Probabilidad de encontrar espacio: {{$probabilidadEspacioLibre}}</p>
+        <p id="probabilidadEspacioLibre">Probabilidad de encontrar espacio: {{$probabilidadEspacioLibre}}%</p>
         <p id="promedioEspaciosLibres">Promedio de espacios libres: {{ $promedioEspaciosLibres }}</p>
     </div>
     
@@ -121,6 +121,10 @@
     <br>
     <h2>Funcion de distribucion exponencial</h2>
     <p>$$F(x) = -\frac{\log(1 - \lambda)}{k} $$</p>
+
+    <h2>Formula de Distribucion Poisson</h2>
+    <p>$$ P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!} $$</p>
+    
 @endsection
 
 @section('script') 
