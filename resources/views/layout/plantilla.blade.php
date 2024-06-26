@@ -17,12 +17,13 @@
 <body>
     <header class="cabecera">
         <i class="fas fa-bars" id="btnMenu"></i>
-        <i class="fas fa-arrow-right-from-bracket"></i>
+        <i onclick="logout()" class="fas fa-arrow-right-from-bracket"></i>
         <div class="contMenu" id="menu">
             <nav class="menu" >
                 <ul>
                     <div class="cabeza">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user" id="nomMenu"><p> {{ Auth::user()->nombre }}</p></i>
+                        
                     </div>
                     <hr>
                     <li>
@@ -76,6 +77,12 @@
         </div>
     </main>
     <div id="fondoGris"></div>
+
+    <!-- Formulario oculto para el logout -->
+    <form id="logout-form" action="{{ route('usuario.logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

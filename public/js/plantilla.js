@@ -39,3 +39,7 @@ function hist(){
         $('#flecha2').css('transform', 'none');
     }
 }
+
+function logout() {
+    document.getElementById('logout-form').submit();
+}

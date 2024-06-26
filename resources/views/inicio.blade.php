@@ -7,7 +7,7 @@
 @section('titulo', 'Mobile Simu')
 
 @section('contenido')
-    <h1>Bienvenido</h1>
+    <h1>Bienvenid@ {{ Auth::user()->nombre }}</h1>
     <br>
     <p class="bienvenido">!Seis divertidos ejercicios de simulacion!</p>
     <div class="contBotones">

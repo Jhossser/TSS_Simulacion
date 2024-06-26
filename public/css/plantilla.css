@@ -156,6 +156,20 @@ body{
     padding-top: 85px;
 }
 
+#nomMenu{
+    font-size: 18px;
+    color: #FFC10D;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0 8px 0;
+}
+#nomMenu p{
+    font-family: 'roboto';
+    margin-bottom: 0;
+    color: #f5f6f7;
+}
+
 /* Imagaen */
 .imagen{
     display: flex;
