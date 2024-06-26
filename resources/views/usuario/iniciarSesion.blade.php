@@ -32,7 +32,7 @@
                 @error('error')
                     <span class="alert alert-info">{{$message}}</span>
                 @enderror
-                <form class="formIniciar" action="{{route('usuario.login')}}" method="POST">
+                <form class="formIniciar" action="{{route('usuario.login')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
