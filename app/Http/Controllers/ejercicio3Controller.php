@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio3;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ejercicio3Controller extends Controller
 {
@@ -168,6 +170,26 @@ class ejercicio3Controller extends Controller
             'tiempo.min' => 'Tiempo minimo de 1 hora'
         ]);
 
+        $userId = Auth::id();
+        $exists = Ejercicio3::where('idUsuario', $userId)
+                        ->where('tasaLlegada', $request->tasaLlegada)
+                        ->where('tasaServicio', $request->tasaServicio)
+                        ->where('cantCupos', $request->capacidad)
+                        ->where('tiemposimu', $request->tiempo)
+                        ->exists();
+                        
+        if (!$exists) {
+            //guardando historial
+            $ej3 = new ejercicio3();
+            $ej3->idUsuario = $userId;
+            $ej3->tasaLlegada = $request->tasaLlegada;
+            $ej3->tasaServicio = $request->tasaServicio;
+            $ej3->cantCupos = $request->capacidad;
+            $ej3->tiemposimu = $request->tiempo;
+            $ej3->save();
+        }
+
+
         $lambda = $request -> tasaLlegada; // tasa de llegada (clientes por hora)
         $mu = $request -> tasaServicio; // tasa de servicio (servicios por hora)
         $cupos = $request -> capacidad; // capacidad del estacionamiento
@@ -271,6 +293,10 @@ class ejercicio3Controller extends Controller
         }
 
         return view('Ejercicio 3.index', compact('porcentajePerdidos',  'probabilidadEspacioLibre', 'promedioEspaciosLibres', 'iteraciones','datosPoisson','datosExponencial','datosUniforme'))->with('datos', $datos);              
+    }
+
+    public function hist(ejercicio3 $hist){
+        return view('Ejercicio 3.edit', compact('hist'));
     }
 }
 

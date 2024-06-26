@@ -23,17 +23,17 @@
         
         <div class="form-group">
             <label for="tasaLlegada">Numero de Cajeros</label>
-            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese el numero de cajeros" >
+            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese el numero de cajeros" value="{{$hist->numCajeros ?? ''}}">
             <span class="error-message" id="error-tasaLlegada"></span>
         </div>
         <div class="form-group">
             <label for="tasaServicio">Clientes por hora</label>
-            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese el numero de clientes por hora" >
+            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese el numero de clientes por hora" value="{{$hist->clientePorHora ?? ''}}">
             <span class="error-message" id="error-tasaServicio"></span>
         </div>
         <div class="form-group">
             <label for="capacidad">Tiempo maximo del cliente en el cajero</label>
-            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese el tiempo del cliente en el cajero" >
+            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese el tiempo del cliente en el cajero" value="{{$hist->maxTiempoCajero ?? ''}}">
             <span class="error-message" id="error-capacidad"></span>
         </div>
         

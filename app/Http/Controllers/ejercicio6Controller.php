@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio6;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -126,6 +127,10 @@ class ejercicio6Controller extends Controller
             'labels' => $labels,
             'data' => $data,
         ];
+    }
+
+    public function hist(ejercicio6 $hist){
+        return view('Ejercicio 6.edit', compact('hist'));
     }
 }
 
