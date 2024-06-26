@@ -4,11 +4,11 @@
     <link rel="stylesheet" href="../../css/ejercicio3.css">
 @endsection
 
-@section('titulo', 'Ejercicio 3')
+@section('titulo', 'Ejercicio 2')
 
 @section('contenido')
     <h1>Problema de Cajeros</h1>
-    <img src="imgCaj" src="../../Image/cajeros.jpg" alt="foto cajeros">
+    <img src="imgEst" src="../../Image/cajeros.jpg" alt="foto cajeros">
     <p class="margenAbajo" style="text-align: justify;">
         Un banco emplea 3 cajeros para servir a sus clientes. Los clientes 
         arriban de acuerdo a un proceso Poisson a una razón media de 40 por hora.

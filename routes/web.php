@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ejercicio1Controller;
+use App\Http\Controllers\ejercicio2Controller;
 use App\Http\Controllers\ejercicio3Controller;
 use App\Http\Controllers\ejercicio4Controller;
 use App\Http\Controllers\ejercicio5Controller;
@@ -21,6 +23,12 @@ Route::get('/', function () {
     return view('inicio');
 })->name('home');
 
+Route::get('/ejercicio1/index',[ejercicio1Controller::class, 'index'])->name('ej1.index');
+Route::get('/ejercicio1/edit',[ejercicio1Controller::class, 'edit'])->name('ej1.edit');
+
+Route::get('/ejercicio2/index',[ejercicio2Controller::class, 'index'])->name('ej2.index');
+Route::get('/ejercicio2/edit',[ejercicio2Controller::class, 'edit'])->name('ej2.edit');
+
 Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
 Route::get('/ejercicio3/edit',[ejercicio3Controller::class, 'edit'])->name('ej3.edit');
 Route::get('/ejercicio3/update',[ejercicio3Controller::class, 'update'])->name('ej3.update');
@@ -37,5 +45,3 @@ Route::get('/ejercicio6/index',[ejercicio6Controller::class, 'index'])->name('ej
 Route::get('/ejercicio6/edit',[ejercicio6Controller::class, 'edit'])->name('ej6.edit');
 Route::get('/ejercicio6/update',[ejercicio6Controller::class, 'update'])->name('ej6.update');
 
-Route::get('/ejercicio2/index',[ejercicio2Controller::class, 'index'])->name('ej2.index');
-Route::get('/ejercicio2/edit',[ejercicio2Controller::class, 'edit'])->name('ej2.edit');
