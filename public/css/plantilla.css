@@ -26,6 +26,7 @@ body{
 
 .contenedor{
     display: flex;
+    justify-content: center;
 }
 
 .cabecera{
@@ -200,3 +201,18 @@ h2{
     border-radius: 3px;
 }
 /* Termina estandar de h1 h2, imagen */
+
+
+/* botones */
+.botones{
+    display: flex;
+    justify-content: center;
+    background-color: #f5f6f7;
+    gap: 5px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 5px 0 5px 0;
+    z-index: 1;
+}

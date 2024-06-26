@@ -1,0 +1,17 @@
+.parrafo{
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.lista{
+    font-size: 18px;
+    padding: 20px;
+}
+
+.imagenEjer1{
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    margin-bottom: 10px;
+}
