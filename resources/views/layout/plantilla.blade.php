@@ -38,10 +38,10 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="{{ ('ambiente.create') }}">Estacion de servicio</a>
+                                <a href="{{ route('ej1.index') }}">Estacion de servicio</a>
                             </li>
                             <li>
-                                <a href="{{ ('AmbientesRegistrados') }}">Cajeros</a>
+                                <a href="{{ route('ej2.index') }}">Cajeros</a>
                             </li>
                             <li>
                                 <a href="{{ route('ej3.index') }}">Estacionamiento</a>
