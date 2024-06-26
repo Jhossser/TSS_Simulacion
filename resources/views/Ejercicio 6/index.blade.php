@@ -7,12 +7,11 @@
 @section('titulo', 'Reabastecimiento')
 
 @section('contenido')
-    <!-- Contenido de la vista -->
     <h1>Problema de Reabastecimiento</h1>
     <div class="contenedor">
-    <img class="imgEst" src="../../Image/reabastecimiento.jpg"  alt="Colas de servicio">
-</div>
-<p class="parrafo" style="text-align: justify;">
+        <img class="imgEst" src="../../Image/reabastecimiento.jpg" alt="Colas de servicio">
+    </div>
+    <p class="parrafo" style="text-align: justify;">
     Una cadena de supermercados es abastecida por un almacén central. La mercancía que llega a
 este almacén es descargada en turnos nocturnos. Los camiones que se descargan en este almacén
 llegan en forma aleatoria de acuerdo a un proceso Poisson a una razón media de 2 camiones por
@@ -25,29 +24,39 @@ entre 10 y 20 minutos y si el equipo está formado por 6 trabajadores, el tiempo
 uniformemente distribuido entre 5 y 15 minutos. Cada trabajador recibe $25 por hora durante el
 turno nocturno de ocho horas. El costo de tener un camión esperando se estima en $50 por hora.
 ¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo
-</p>
-<br>
+    </p>
+    <br>
 
-<!-- Aquí mostramos los resultados de la simulación -->
-<div class="table-responsive">
-    
-    <h3>Tiempos por Cliente</h3>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
+    <!-- Aquí mostramos los resultados de la simulación -->
+    <div class="table-responsive">
+        <h3>Eficiencia de Equipos</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Equipo</th>
+                    <th>Tiempo Promedio de Servicio (horas)</th>
+                    <th>Tiempo Promedio en el Sistema (horas)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($teamsResults as $team => $result)
+                    <tr>
+                        <td>Equipo {{ $team }}</td>
+                        <td>{{ round($result['avgServiceTime'], 2) }}</td>
+                        <td>{{ round($result['avgSystemTime'], 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-            </tr>
-        </thead>
-        <tbody>
+    <!-- Gráfico del tiempo en el sistema de los camiones por cada equipo -->
+    <h1>Gráfico del Tiempo en el Sistema de los Camiones por Equipo</h1>
+    <canvas id="graficoTiempoSistema" width="400" height="200"></canvas>
 
-        </tbody>
-    </table>
-</div>
-    <!-- Gráficos -->
-    <h1>Gráfico de Distribución de Poisson</h1>
-    <canvas id="graficoPoisson" width="400" height="200"></canvas>
-    <h1>Gráfico de Distribución Uniforme</h1>
-    <canvas id="graficoUniforme" width="400" height="200"></canvas>
+    <!-- Gráfico de la eficiencia de los equipos -->
+    <h1>Gráfico de Eficiencia de Equipos</h1>
+    <canvas id="graficoEficienciaEquipos" width="400" height="200"></canvas>
 
     <!-- Botones y scripts -->
     <div class="botones">
@@ -62,22 +71,24 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
 
 @section('script')
     <script>
-        // Script para inicializar los gráficos con los datos pasados desde el controlador
-        var ctxPoisson = document.getElementById('graficoPoisson').getContext('2d');
-        var graficoPoisson = new Chart(ctxPoisson, {
-            type: 'line',
+        // Datos para el gráfico de tiempo en el sistema de los camiones por equipo
+        var labels = ["Equipo 1", "Equipo 2", "Equipo 3", "Equipo 4"];
+        var systemTimes = @json(array_map(fn($result) => round($result['avgSystemTime'], 2), $teamsResults));
+
+        var ctxTiempoSistema = document.getElementById('graficoTiempoSistema').getContext('2d');
+        var graficoTiempoSistema = new Chart(ctxTiempoSistema, {
+            type: 'bar',
             data: {
-                labels: @json($datosGraficoPoisson['labels']),
+                labels: labels,
                 datasets: [{
-                    label: 'Distribución de Poisson',
-                    data: @json($datosGraficoPoisson['data']),
+                    label: 'Tiempo Promedio en el Sistema (horas)',
+                    data: systemTimes,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
-                // Configuración opcional
                 scales: {
                     y: {
                         beginAtZero: true
@@ -86,14 +97,17 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
             }
         });
 
-        var ctxUniforme = document.getElementById('graficoUniforme').getContext('2d');
-        var graficoUniforme = new Chart(ctxUniforme, {
+        // Datos para el gráfico de eficiencia de los equipos
+        var avgServiceTimes = @json(array_map(fn($result) => round($result['avgServiceTime'], 2), $teamsResults));
+
+        var ctxEficienciaEquipos = document.getElementById('graficoEficienciaEquipos').getContext('2d');
+        var graficoEficienciaEquipos = new Chart(ctxEficienciaEquipos, {
             type: 'bar',
             data: {
-                labels: @json($datosGraficoUniforme['labels']),
+                labels: labels,
                 datasets: [{
-                    label: 'Distribución Uniforme',
-                    data: @json($datosGraficoUniforme['data']),
+                    label: 'Tiempo Promedio de Servicio (horas)',
+                    data: avgServiceTimes,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -109,3 +123,4 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
         });
     </script>
 @endsection
+
