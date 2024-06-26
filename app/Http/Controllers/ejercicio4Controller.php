@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio4;
 use Illuminate\Http\Request;
 use Illuminate\Support\Composer;
+use Illuminate\Support\Facades\Auth;
 
 class ejercicio4Controller extends Controller
 {
@@ -28,6 +30,31 @@ class ejercicio4Controller extends Controller
             [
                 
             ]);
+
+            $userId = Auth::id();
+            $exists = Ejercicio4::where('idUsuario', $userId)
+                            ->where('velocidad', $request->vc)
+                            ->where('distancia', $request->d)
+                            ->where('tiempoCarga', $request->tc)
+                            ->where('tiempoDescarga', $request->td)
+                            ->where('jornada', $request->tt)
+                            ->where('costoExedente', $request->ce)
+                            ->where('costoAnualCamion', $request->cac)
+                            ->exists();
+
+            if (!$exists) {
+                //guardando historial
+                $ej4 = new ejercicio4();
+                $ej4->idUsuario = $userId;
+                $ej4->velocidad = $request->vc;
+                $ej4->distancia = $request->d;
+                $ej4->tiempoCarga = $request->tc;
+                $ej4->tiempoDescarga = $request->td;
+                $ej4->jornada = $request->tt;
+                $ej4->costoExedente = $request->ce;
+                $ej4->costoAnualCamion = $request->cac;
+                $ej4->save();
+            }
 
             //datos editables
             $velocidadCamion = $request-> vc; //km/h
@@ -204,5 +231,9 @@ class ejercicio4Controller extends Controller
     public function edit()
     {
         return view('Ejercicio 4.edit');
+    }
+
+    public function hist(ejercicio4 $hist){
+        return view('Ejercicio 4.edit', compact('hist'));
     }
 }

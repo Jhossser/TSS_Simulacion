@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio1;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class Ejercicio1Controller extends Controller
+class ejercicio1Controller extends Controller
 {
     public function generatePoisson($lambda) {
         $l = exp(-$lambda);
@@ -85,6 +87,32 @@ class Ejercicio1Controller extends Controller
     }
 
     public function index(Request $request) {
+        if(isset($request->lambda) || isset($request->meanService1) || isset($request->minService2) || isset($request->maxService2) || isset($request->numClientes)){
+
+            $userId = Auth::id();
+            $exists = ejercicio1::where('idUsuario', $userId)
+                            ->where('lambda', $request->lambda)
+                            ->where('mediaEst1', $request->meanService1)
+                            ->where('minEst2', $request->minService2)
+                            ->where('maxEst2', $request->maxService2)
+                            ->where('numClientes', $request->numClientes)
+                            ->exists();
+                            
+            if (!$exists) {
+                //guardando historial
+                $ej3 = new ejercicio1();
+                $ej3->idUsuario = $userId;
+                $ej3->lambda = $request->lambda;
+                $ej3->mediaEst1 = $request->meanService1;
+                $ej3->minEst2 = $request->minService2;
+                $ej3->maxEst2 = $request->maxService2;
+                $ej3->numClientes = $request->numClientes;
+                $ej3->save();
+            }
+        }
+        
+
+
         // Valores por defecto si no se proporcionan en la solicitud
         $lambda = $request->input('lambda', 20); // Llegadas por hora, valor por defecto: 20
         $meanService1 = $request->input('meanService1', 2) / 60; // Convertido a horas, valor por defecto: 2 minutos
@@ -108,5 +136,8 @@ class Ejercicio1Controller extends Controller
             'systemTimes' => $result['systemTimes']
         ]);
     }
-}
 
+    public function hist(ejercicio1 $hist){
+        return view('Ejercicio 1.edit', compact('hist'));
+    }
+}

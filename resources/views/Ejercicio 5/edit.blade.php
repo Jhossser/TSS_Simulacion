@@ -18,7 +18,7 @@
         <div class="form-group">
             <label for="ns">Número de Simulaciones</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="ns" id="ns" placeholder="Ingrese # simulaciones" value="{{old('ns')}}">
+                <input class="form-control" type="number" name="ns" id="ns" placeholder="Ingrese # simulaciones" value="{{old('ns',$hist->numSimu ?? '')}}">
                 <span></span>
             </div>
             @error('ns')
@@ -28,7 +28,7 @@
         <div class="form-group">
             <label for="no">Numero de operarios</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="no" id="no" placeholder="Ingrese operarios" value="{{old('no')}}">
+                <input class="form-control" type="number" name="no" id="no" placeholder="Ingrese operarios" value="{{old('no',$hist->cantOperadores ?? '')}}">
                 <span></span>
             </div>
             @error('no')
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label for="cmo">Costo maquina ociosa</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="cmo" id="cmo" placeholder="Ingrese costo de maquina ociosa" value="{{old('cmo')}}">
+                <input class="form-control" type="number" name="cmo" id="cmo" placeholder="Ingrese costo de maquina ociosa" value="{{old('cmo',$hist->costoMaqOciosa ?? '')}}">
                 <span>Bs/hora</span>
             </div>
             @error('cmo')
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="sh">Salario de operador</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="sh" id="sh" placeholder="Ingrese salario de operador" value="{{old('sh')}}">
+                <input class="form-control" type="number" name="sh" id="sh" placeholder="Ingrese salario de operador" value="{{old('sh',$hist->salario ?? '')}}">
                 <span>Bs/hora</span>
             </div>
             @error('sh')

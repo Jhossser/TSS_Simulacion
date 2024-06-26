@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio5;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ejercicio5Controller extends Controller
 {
@@ -24,6 +26,25 @@ class ejercicio5Controller extends Controller
             [
                 
             ]);
+
+            $userId = Auth::id();
+            $exists = ejercicio5::where('idUsuario', $userId)
+                            ->where('numSimu', $request->ns)
+                            ->where('cantOperadores', $request->no)
+                            ->where('costoMaqOciosa', $request->cmo)
+                            ->where('salario', $request->sh)
+                            ->exists();
+
+            if (!$exists) {
+                //guardando historial
+                $ej5 = new ejercicio5();
+                $ej5->idUsuario = $userId;
+                $ej5->numSimu = $request->ns;
+                $ej5->cantOperadores = $request->no;
+                $ej5->costoMaqOciosa = $request->cmo;
+                $ej5->salario = $request->sh;
+                $ej5->save();
+            }
 
             //datos editables
             $numSimulaciones = $request-> ns; 
@@ -115,5 +136,9 @@ class ejercicio5Controller extends Controller
     public function edit()
     {
         return view('Ejercicio 5.edit');
+    }
+
+    public function hist(ejercicio5 $hist){
+        return view('Ejercicio 5.edit', compact('hist'));
     }
 }

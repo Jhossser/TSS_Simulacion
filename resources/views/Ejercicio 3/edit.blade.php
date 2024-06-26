@@ -20,28 +20,28 @@
         @csrf
         <div class="form-group">
             <label for="tasaLlegada">Tasa de llegada</label>
-            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese tasa de llegada de vehiculos" value="{{old('tasaLlegada')}}">
+            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese tasa de llegada de vehiculos" value="{{old('tasaLlegada', $hist->tasaLlegada ?? '')}}">
             @error('tasaLlegada')
                 <span class="text-danger">*{{$message}}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="tasaServicio">Tasa de servicio</label>
-            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese la tasa de servicio en horas" value="{{old('tasaServicio')}}">
+            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese la tasa de servicio en horas" value="{{old('tasaServicio', $hist->tasaServicio ?? '')}}">
             @error('tasaServicio')
                 <span class="text-danger">*{{$message}}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="capacidad">Capacidad del estacionamiento</label>
-            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese la capacidad del estacionamiento" value="{{old('capacidad')}}">
+            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese la capacidad del estacionamiento" value="{{old('capacidad', $hist->cantCupos ?? '')}}">
             @error('capacidad')
                 <span class="text-danger">*{{$message}}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="tiempo">Tiempo de simulacion</label>
-            <input class="form-control" type="number" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo en horas" value="{{old('tiempo')}}">
+            <input class="form-control" type="number" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo en horas" value="{{old('tiempo', $hist->tiemposimu ?? '')}}">
             @error('tiempo')
                 <span class="text-danger">*{{$message}}</span>
             @enderror

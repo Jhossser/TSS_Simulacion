@@ -30,7 +30,7 @@
                 <div style="width: 100%;">
                     <h1>Registrarse</h1>
                 </div>
-                <form class="formIniciar" action="{{route('usuario.register')}}" method="POST">
+                <form class="formIniciar" action="{{route('usuario.register')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="nombre">Nombre</label>

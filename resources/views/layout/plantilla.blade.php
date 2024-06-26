@@ -14,6 +14,7 @@
     @yield('links')
     <title>@yield('titulo')</title>
 </head>
+@yield('style')
 <body>
     <header class="cabecera">
         <i class="fas fa-bars" id="btnMenu"></i>
@@ -22,7 +23,7 @@
             <nav class="menu" >
                 <ul>
                     <div class="cabeza">
-                        <i class="fas fa-user" id="nomMenu"><p> {{ Auth::user()->nombre }}</p></i>
+                        <i class="fas fa-user" id="nomMenu"><p>{{ Auth::user()->nombre }}</p></i>
                         
                     </div>
                     <hr>
@@ -37,10 +38,10 @@
                     <nav class="subMenu" id="sub1">
                         <ul>
                             <li>
-                                <a href="{{ ('ambiente.create') }}">Estacion de servicio</a>
+                                <a href="{{ route('ej1.index') }}">Estacion de servicio</a>
                             </li>
                             <li>
-                                <a href="{{ ('AmbientesRegistrados') }}">Cajeros</a>
+                                <a href="{{ route('ej2.index') }}">Cajeros</a>
                             </li>
                             <li>
                                 <a href="{{ route('ej3.index') }}">Estacionamiento</a>
@@ -57,7 +58,7 @@
                         </ul>
                     </nav>
                     <hr>
-                    <li onclick="hist()" class="btnPrin">
+                    <li onclick="window.location='{{route('historial.index')}}'" class="btnPrin">
                         <p><i class='fas fa-clock-rotate-left'></i> HISTORIAL</p>
                         <i class="fas fa-caret-down" id="flecha2"></i>
                     </li>

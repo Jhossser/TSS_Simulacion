@@ -17,23 +17,23 @@
     @csrf <!-- Esto se puede eliminar si se usa el método GET -->
     <div class="form-group">
         <label for="lambda">Lambda (clientes por hora):</label>
-        <input type="number" class="form-control" id="lambda" name="lambda" value="{{ old('lambda', 20) }}" required>
+        <input type="number" class="form-control" id="lambda" name="lambda" value="{{ old('lambda', $hist->lambda ?? '') }}" required>
     </div>
     <div class="form-group">
         <label for="meanService1">Media de servicio en la estación 1 (minutos):</label>
-        <input type="number" class="form-control" id="meanService1" name="meanService1" value="{{ old('meanService1', 2) }}" step="0.01" required>
+        <input type="number" class="form-control" id="meanService1" name="meanService1" value="{{ old('meanService1', $hist->mediaEst1 ?? '') }}" step="0.01" required>
     </div>
     <div class="form-group">
         <label for="minService2">Mínimo de servicio en la estación 2 (minutos):</label>
-        <input type="number" class="form-control" id="minService2" name="minService2" value="{{ old('minService2', 1) }}" step="0.01" required>
+        <input type="number" class="form-control" id="minService2" name="minService2" value="{{ old('minService2', $hist->minEst2 ?? '') }}" step="0.01" required>
     </div>
     <div class="form-group">
         <label for="maxService2">Máximo de servicio en la estación 2 (minutos):</label>
-        <input type="number" class="form-control" id="maxService2" name="maxService2" value="{{ old('maxService2', 2) }}" step="0.01" required>
+        <input type="number" class="form-control" id="maxService2" name="maxService2" value="{{ old('maxService2', $hist->maxEst2 ?? '') }}" step="0.01" required>
     </div>
     <div class="form-group">
         <label for="numClientes">Número de clientes:</label>
-        <input type="number" class="form-control" id="numClientes" name="numClientes" value="{{ old('numClientes', 100) }}" required>
+        <input type="number" class="form-control" id="numClientes" name="numClientes" value="{{ old('numClientes', $hist->numClientes ?? '') }}" required>
     </div>
     <button type="submit" class="btn btn-primary">Simular</button>
 </form>
