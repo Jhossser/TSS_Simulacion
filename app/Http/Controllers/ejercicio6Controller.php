@@ -4,47 +4,74 @@ namespace App\Http\Controllers;
 
 use App\Models\ejercicio6;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class ejercicio6Controller extends Controller
 {
     public function index(Request $request)
     {
-        $lambda = 2; // Tasa media de llegada de camiones por hora (ejemplo)
+        $lambda = $request->input('lambda', 2); // Tasa media de llegada de camiones por hora
+        $numEquipos = $request->input('numEquipos', 4); // Número de equipos
+        $minTiemposServicio = $request->input('minTiempoServicio', [20, 20, 20, 20]); // Tiempos mínimos de servicio en minutos
+        $maxTiemposServicio = $request->input('maxTiempoServicio', [30, 30, 30, 30]); // Tiempos máximos de servicio en minutos
+
         $tiempoSimulacion = 8; // Tiempo de simulación en horas (ejemplo)
-        $minTiempoServicio = 20; // Tiempo mínimo de servicio en minutos
-        $maxTiempoServicio = 30; // Tiempo máximo de servicio en minutos
+        $teamsResults = [];
 
-        // Generar tiempos de llegada de camiones (proceso de Poisson)
-        $arrivalTimes = $this->generateArrivalTimes($lambda, $tiempoSimulacion);
+        for ($team = 1; $team <= $numEquipos; $team++) {
+            $minTiempoServicio = $minTiemposServicio[$team - 1];
+            $maxTiempoServicio = $maxTiemposServicio[$team - 1];
 
-        // Número total de camiones que llegan
-        $cantidadCamiones = count($arrivalTimes);
+            // Generar tiempos de llegada de camiones (proceso de Poisson)
+            $arrivalTimes = $this->generateArrivalTimes($lambda, $tiempoSimulacion);
 
-        // Generar tiempos de servicio del equipo de 3 personas (distribución uniforme)
-        $serviceTimes = $this->generateServiceTimes($minTiempoServicio, $maxTiempoServicio, $cantidadCamiones);
+            // Número total de camiones que llegan
+            $cantidadCamiones = count($arrivalTimes);
 
-        // Calcular el tiempo total en el sistema para cada camión
-        $systemTimes = [];
-        for ($i = 0; $i < $cantidadCamiones; $i++) {
-            $systemTimes[] = $arrivalTimes[$i] + $serviceTimes[$i];
+            // Generar tiempos de servicio del equipo (distribución uniforme)
+            $serviceTimes = $this->generateServiceTimes($minTiempoServicio, $maxTiempoServicio, $cantidadCamiones);
+
+            // Calcular el tiempo total en el sistema para cada camión
+            $systemTimes = [];
+            for ($i = 0; $i < $cantidadCamiones; $i++) {
+                $systemTimes[] = $arrivalTimes[$i] + $serviceTimes[$i];
+            }
+
+            $avgServiceTime = array_sum($serviceTimes) / $cantidadCamiones;
+            $avgSystemTime = array_sum($systemTimes) / $cantidadCamiones;
+
+            $teamsResults[$team] = [
+                'avgServiceTime' => $avgServiceTime,
+                'avgSystemTime' => $avgSystemTime,
+                'serviceTimes' => $serviceTimes,
+                'systemTimes' => $systemTimes,
+                'arrivalTimes' => $arrivalTimes,
+            ];
         }
 
-        // Datos para los gráficos (ejemplos)
-        $datosGraficoPoisson = $this->generatePoissonData($arrivalTimes, $tiempoSimulacion);
-        $datosGraficoUniforme = $this->generateUniformData($serviceTimes);
-
-        // Pasar los datos a la vista
         return view('Ejercicio 6.index', [
-            'arrivalTimes' => $arrivalTimes,
-            'serviceTimes' => $serviceTimes,
-            'systemTimes' => $systemTimes,
             'lambda' => $lambda,
-            'minTiempoServicio' => $minTiempoServicio,
-            'maxTiempoServicio' => $maxTiempoServicio,
-            'datosGraficoPoisson' => $datosGraficoPoisson,
-            'datosGraficoUniforme' => $datosGraficoUniforme,
+            'numEquipos' => $numEquipos,
+            'minTiemposServicio' => $minTiemposServicio,
+            'maxTiemposServicio' => $maxTiemposServicio,
+            'teamsResults' => $teamsResults,
         ]);
+    }
+
+    public function edit()
+    {
+        return view('Ejercicio 6.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'lambda' => 'required|numeric',
+            'numEquipos' => 'required|integer|min:1',
+            'minTiempoServicio.*' => 'required|numeric|min:1',
+            'maxTiempoServicio.' => 'required|numeric|gte:minTiempoServicio.',
+        ]);
+    
+        return redirect()->route('ej6.index', $request->all());
     }
 
     private function generateArrivalTimes($lambda, $tiempoSimulacion)
@@ -69,66 +96,6 @@ class ejercicio6Controller extends Controller
         }
         return $serviceTimes;
     }
-
-    private function generatePoissonData($arrivalTimes, $tiempoSimulacion)
-    {
-        // Inicializar un array para los datos del gráfico
-        $data = [];
-        $intervals = 10; // Número de intervalos en los que dividir el tiempo de simulación
-        $intervalLength = $tiempoSimulacion / $intervals;
-    
-        // Contar las llegadas en cada intervalo de tiempo
-        for ($i = 0; $i < $intervals; $i++) {
-            $data[$i] = 0;
-        }
-    
-        foreach ($arrivalTimes as $time) {
-            $intervalIndex = min(floor($time / $intervalLength), $intervals - 1);
-            $data[$intervalIndex]++;
-        }
-    
-        // Crear las etiquetas para los intervalos de tiempo
-        $labels = [];
-        for ($i = 0; $i < $intervals; $i++) {
-            $labels[] = round($i * $intervalLength, 2) . "-" . round(($i + 1) * $intervalLength, 2);
-        }
-    
-        return [
-            'labels' => $labels,
-            'data' => array_values($data),
-        ];
-    }
-    
-    private function generateUniformData($serviceTimes)
-    {
-        $min = 20; // Tiempo mínimo de servicio en minutos
-        $max = 30; // Tiempo máximo de servicio en minutos
-        $intervals = 10; // Número de intervalos para el gráfico
-
-        // Calcular el ancho de cada intervalo
-        $intervalWidth = ($max - $min) / $intervals;
-
-        // Inicializar los contadores para cada intervalo
-        $data = array_fill(0, $intervals, 0);
-
-        // Contar cuántos tiempos caen en cada intervalo
-        foreach ($serviceTimes as $time) {
-            $index = min(floor(($time * 60 - $min) / $intervalWidth), $intervals - 1); // Convertir tiempo a minutos y calcular el índice
-            $data[$index]++;
-        }
-
-        // Crear las etiquetas para los intervalos de tiempo
-        $labels = [];
-        for ($i = 0; $i < $intervals; $i++) {
-            $labels[] = round($min + $i * $intervalWidth, 2) . "-" . round($min + ($i + 1) * $intervalWidth, 2);
-        }
-
-        return [
-            'labels' => $labels,
-            'data' => $data,
-        ];
-    }
-
     public function hist(ejercicio6 $hist){
         return view('Ejercicio 6.edit', compact('hist'));
     }
