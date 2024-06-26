@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ejercicio1Controller;
 use App\Http\Controllers\ejercicio3Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,5 @@ Route::get('/', function () {
     return view('inicio');
 })->name('home');
 
+Route::get('/ejercicio1/index',[Ejercicio1Controller::class, 'index'])->name('ej1.index');
 Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
-
-
