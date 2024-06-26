@@ -35,7 +35,7 @@ class Ejercicio1Controller extends Controller
         return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
     }
 
-    public function simulateQueueSystem($lambda, $meanService1, $minService2, $maxService2) {
+    public function simulateQueueSystem($lambda, $meanService1, $minService2, $maxService2, $numClientes) {
         $arrivalTimes = [];
         $serviceTimes1 = [];
         $serviceTimes2 = [];
@@ -45,7 +45,7 @@ class Ejercicio1Controller extends Controller
         $totalServiceTime1 = 0;
         $totalServiceTime2 = 0;
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < $numClientes; $i++) {
             // Llegada a la estación 1
             $arrivalTime = $i * (60 / $lambda); // Tiempo entre llegadas
             $arrivalTimes[] = $this->formatTime($arrivalTime);
@@ -67,16 +67,16 @@ class Ejercicio1Controller extends Controller
             $totalTimeInSystem += $systemTime;
         }
 
-        $averageTimeInSystem = $this->formatTime($totalTimeInSystem / 100);
-        $averageServiceTime1 = $this->formatTime($totalServiceTime1 / 100);
-        $averageServiceTime2 = $this->formatTime($totalServiceTime2 / 100);
+        $averageTimeInSystem = $this->formatTime($totalTimeInSystem / $numClientes);
+        $averageServiceTime1 = $this->formatTime($totalServiceTime1 / $numClientes);
+        $averageServiceTime2 = $this->formatTime($totalServiceTime2 / $numClientes);
 
         return [
             'averageTimeInSystem' => $averageTimeInSystem,
             'averageServiceTime1' => $averageServiceTime1,
             'averageServiceTime2' => $averageServiceTime2,
-            'averageServiceTime1InMinutes' => $totalServiceTime1 / 100,
-            'averageServiceTime2InMinutes' => $totalServiceTime2 / 100,
+            'averageServiceTime1InMinutes' => $totalServiceTime1 / $numClientes,
+            'averageServiceTime2InMinutes' => $totalServiceTime2 / $numClientes,
             'arrivalTimes' => $arrivalTimes,
             'serviceTimes1' => $serviceTimes1,
             'serviceTimes2' => $serviceTimes2,
@@ -85,13 +85,17 @@ class Ejercicio1Controller extends Controller
     }
 
     public function index(Request $request) {
+        // Valores por defecto si no se proporcionan en la solicitud
         $lambda = $request->input('lambda', 20); // Llegadas por hora, valor por defecto: 20
-        $meanService1 = 2 / 60; // 2 minutos por persona, convertido a horas
-        $minService2 = 1 / 60; // 1 minuto, convertido a horas
-        $maxService2 = 2 / 60; // 2 minutos, convertido a horas
+        $meanService1 = $request->input('meanService1', 2) / 60; // Convertido a horas, valor por defecto: 2 minutos
+        $minService2 = $request->input('minService2', 1) / 60; // Convertido a horas, valor por defecto: 1 minuto
+        $maxService2 = $request->input('maxService2', 2) / 60; // Convertido a horas, valor por defecto: 2 minutos
+        $numClientes = $request->input('numClientes', 100); // Número de clientes para la simulación, valor por defecto: 100
 
-        $result = $this->simulateQueueSystem($lambda, $meanService1, $minService2, $maxService2);
+        // Simular el sistema de colas
+        $result = $this->simulateQueueSystem($lambda, $meanService1, $minService2, $maxService2, $numClientes);
 
+        // Devolver la vista con los resultados de la simulación
         return view('Ejercicio 1.index', [
             'averageTimeInSystem' => $result['averageTimeInSystem'],
             'averageServiceTime1' => $result['averageServiceTime1'],
@@ -105,3 +109,4 @@ class Ejercicio1Controller extends Controller
         ]);
     }
 }
+

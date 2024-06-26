@@ -23,6 +23,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/ejercicio1/index',[Ejercicio1Controller::class, 'index'])->name('ej1.index');
+Route::get('/ejercicio1/edit', function () {
+    return view('Ejercicio 1.edit');
+})->name('ej1.edit');
+
 Route::get('/ejercicio3/index',[ejercicio3Controller::class, 'index'])->name('ej3.index');
 Route::get('/ejercicio3/edit',[ejercicio3Controller::class, 'edit'])->name('ej3.edit');
 Route::get('/ejercicio3/update',[ejercicio3Controller::class, 'update'])->name('ej3.update');

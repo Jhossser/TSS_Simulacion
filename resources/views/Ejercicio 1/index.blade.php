@@ -10,9 +10,9 @@
 @section('contenido')
 <h1>Colas de servicio</h1>
 <div class="contenedor">
-    <img class="imagenEjer1" src="../../Image/Colas_de_servicio.jpg" alt="Colas de servicio">
+    <img class="imgEst" src="../../Image/Colas_de_servicio.jpg" alt="Colas de servicio">
 </div>
-<p class="parrafo">
+<p class="parrafo" style="text-align: justify;">
     Se tiene un sistema de colas formado por dos estaciones en serie. Los clientes atendidos en la primera estación pasan en seguida a formar cola en la segunda. En la primera estación de servicio,
     la razón de llegadas sigue una distribución Poisson con media de 20 clientes por hora, y el tiempo de servicio sigue una distribución exponencial con media de 2 minutos por persona. En la segunda
     estación, el tiempo de servicio está uniformemente distribuido entre 1 y 2 minutos. Para esta información:
@@ -31,7 +31,7 @@
     
     <h3>Tiempos por Cliente</h3>
     <table class="table table-bordered table-striped">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Cliente</th>
                 <th>Tiempo de Llegada</th>
@@ -59,9 +59,20 @@
     <h3>Eficiencia de Atención</h3>
 </div>
 <canvas id="eficienciaChart" width="150" height="200"></canvas>
+<br>
+    <div class="botones">
+        <a href="{{route('ej1.edit')}}" class="btn btn-primary">Personalizar problema</a>
+        @if (isset($datos))
+            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
+        @else
+            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
+        @endif
+    </div>
+    <br>
 @endsection
 
 @section('script')
+<script src="../../js/ej1.js"></script>
 <script>
     var ctx = document.getElementById('eficienciaChart').getContext('2d');
     var eficienciaChart = new Chart(ctx, {
