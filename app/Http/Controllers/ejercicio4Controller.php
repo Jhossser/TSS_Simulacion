@@ -15,15 +15,39 @@ class ejercicio4Controller extends Controller
         $diasSimulados = 250; //dias
         $maxCamiones = 10; //de 1 a 10 camiones
 
-        //datos editables
-        $velocidadCamion = 90; //km/h
-        $distancia = 30; //km
-        $tiempoTrabajo = 8; //horas
-        $tiempoCarga = 70; //min
-        $tiempoDescarga = 60; //min
-        $costoTransporteExtra = 100; //Bs.
-        $costoAnualCamion = 100000; //Bs./año
-        //termina datos editables
+        if(isset($request->vc) || isset($request->d) || isset($request->tt) || isset($request->tc) || isset($request->td) || isset($request->ce) || isset($request->cac)){
+            $request->validate([
+                'vc' => 'required|numeric|min:1',
+                'd' => 'required|numeric|min:0',
+                'tt' => 'required|numeric|min:1',
+                'tc' => 'required|numeric|min:1',
+                'td' => 'required|numeric|min:1',
+                'ce' => 'required|numeric|min:0',
+                'cac' => 'required|numeric|min:0',
+            ],
+            [
+                
+            ]);
+
+            //datos editables
+            $velocidadCamion = $request-> vc; //km/h
+            $distancia = $request-> d; //km
+            $tiempoTrabajo = $request-> tt; //horas
+            $tiempoCarga = $request-> tc; //min
+            $tiempoDescarga = $request-> td; //min
+            $costoTransporteExtra = $request-> ce; //Bs.
+            $costoAnualCamion = $request-> cac; //Bs./año
+
+        }else{
+            $velocidadCamion = 90; //km/h
+            $distancia = 30; //km
+            $tiempoTrabajo = 8; //horas
+            $tiempoCarga = 70; //min
+            $tiempoDescarga = 60; //min
+            $costoTransporteExtra = 100; //Bs.
+            $costoAnualCamion = 100000; //Bs./año
+        }
+
 
         $datos = [
             'vc' => $velocidadCamion,
@@ -158,11 +182,13 @@ class ejercicio4Controller extends Controller
                 'costoMinimo2' => $costoMinimo2,
                 'camionesConCostoMinimo' => $camionesConCostoMinimo,
                 'costoTotalPorCamion' => $costoTotalPorCamion,
+                'transporteDia' => $transporteDia,
+                'prodDia' => $prodDia,
             ]);
         }
 
         //print_r($sumaTransportadoPorCamion);
-        return view('Ejercicio 4.index', compact('costoMinimo2','camionesConCostoMinimo','costoTotalPorCamion','diasSimulados'))->with('datos', $datos);
+        return view('Ejercicio 4.index', compact('costoMinimo2','camionesConCostoMinimo','costoTotalPorCamion','diasSimulados','transporteDia','prodDia'))->with('datos', $datos);
     }
 
     private function aleatorio(){
@@ -175,8 +201,8 @@ class ejercicio4Controller extends Controller
         return $a + ($b - $a) * $u;
     }
 
-    public function update(Request $request)
+    public function edit()
     {
-
+        return view('Ejercicio 4.edit');
     }
 }

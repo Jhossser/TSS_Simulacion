@@ -56,21 +56,20 @@ function rehacer(){
         data: formData,
         dataType: 'json',
         success: function(response) {
-            $('#camionesConCostoMinimo').text(response.camionesConCostoMinimo + 'camiones');
+            $('#camionesConCostoMinimo').text(response.camionesConCostoMinimo + ' camiones');
             $('#costoMinimo2').text('Bs. '+response.costoMinimo2);
 
-            // let tableBody = '';
-            // $.each(response.iteraciones, function(index, iteracion) {
-            //     tableBody += '<tr>';
-            //     tableBody += '<td>' + Math.round(iteracion.time) + '</td>';
-            //     tableBody += '<td>' + iteracion.event + '</td>';
-            //     tableBody += '<td>' + iteracion.available_spaces + '</td>';
-            //     tableBody += '<td>' + iteracion.occupied_spaces + '</td>';
-            //     tableBody += '<td>' + iteracion.lost_customers + '</td>';
-            //     tableBody += '</tr>';
-            // });
-            //
-            // $('#tablaIteracion').html(tableBody);
+            let tableBody = '';
+            $.each(response.transporteDia, function(index, tranporteDelDia) {
+                tableBody += '<tr>';
+                tableBody += '<td>' + tranporteDelDia.dia + '</td>';
+                tableBody += '<td>' + response.prodDia[tranporteDelDia.dia-1] + '</td>';
+                tableBody += '<td>' + tranporteDelDia.camiones + '</td>';
+                tableBody += '<td>' + tranporteDelDia.transportado + '</td>';
+                tableBody += '</tr>';
+            });
+            
+            $('#tablaIteracion').html(tableBody);
             
             updateCharts(response.costoTotalPorCamion);
         },

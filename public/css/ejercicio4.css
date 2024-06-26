@@ -1,5 +1,20 @@
-.table{
+
+/* tabla */
+#tablaPeque{
     width: 50%;
     font-size: 14px;
 }
+.table-responsive{
+    max-height: 600px;
+}
+/* termina tabla */
 
+.medidaInput{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+} 
+
+.form-control{
+    width: 85%;
+}

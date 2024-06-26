@@ -88,7 +88,7 @@ class ejercicio3Controller extends Controller
         }
 
         $porcentajePerdidos = ($clientesPerdidos / $totalClientes) * 100;
-        $probabilidadEspacioLibre = $tiempoConlugarLibre / $tiempoSimulacion;
+        $probabilidadEspacioLibre = 100 - $porcentajePerdidos;
         $promedioEspaciosLibres = array_sum($lugaresLibres) / $tiempoSimulacion;
 
         if ($request->ajax()) {
@@ -255,7 +255,7 @@ class ejercicio3Controller extends Controller
         }
 
         $porcentajePerdidos = ($clientesPerdidos / $totalClientes) * 100;
-        $probabilidadEspacioLibre = $tiempoConlugarLibre / $tiempoSimulacion;
+        $probabilidadEspacioLibre = 100 - $porcentajePerdidos;
         $promedioEspaciosLibres = array_sum($lugaresLibres) / $tiempoSimulacion;
 
         if ($request->ajax()) {

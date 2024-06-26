@@ -21,14 +21,14 @@
         siguiente distribuci6n de probabilidad:
     </p>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped" id="tablaPeque">
             <thead class="thead-dark">
                 <tr>
                     <th>Produccion diaria (ton)</th>
                     <th>Probabilidad</th>
                 </tr>
             </thead>
-            <tbody id="tablaIteracion">
+            <tbody>
                     <tr>
                         <td>50 - 55</td>
                         <td>0.10</td>
@@ -66,14 +66,14 @@
         al depósito, es una variable aleatoria cuya distribución de probabilidad es la siguiente:
     </p>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped" id="tablaPeque">
             <thead class="thead-dark">
                 <tr>
                     <th>Toneladas diaraias por camion</th>
                     <th>Probabilidad</th>
                 </tr>
             </thead>
-            <tbody id="tablaIteracion">
+            <tbody>
                     <tr>
                         <td>4.0 - 4.5</td>
                         <td>0.30</td>
@@ -99,7 +99,15 @@
         el excedente es enviado a través de otra compañía transportista a un costo de $100 por tonelada.
         Además, el costo promedio anual de un nuevo camión es de $100,000.
     </p>
-    <span class="alert alert-primary"> Info de Ej4</span>
+    <span class="alert alert-primary">
+        <p>Velocidad promedio de camion = {{$datos['vc']}}</p>
+        <p>Distancia entre fabrica y almacen = {{$datos['d']}}</p>
+        <p>Tiempo de trabajo = {{$datos['tt']}}</p>
+        <p>Tiempo en cargar = {{$datos['tc']}}</p>
+        <p>Tiempo en descargar = {{$datos['td']}}</p>
+        <p>Costo de transportar producto exedente = {{$datos['ce']}}</p>
+        <p>Costo anual de camion = {{$datos['cac']}}</p>
+    </span>
 
     <p class="margenAbajo">
         a) Si se trabajan 250 días en el
@@ -107,38 +115,11 @@
     </p>
     <br>
     <div class="margenAbajo">
-        <h1>Proceso de Llegada de Clientes</h1>
+        <h1>Proceso de Transporte</h1>
         <p style="text-align: justify;">
-            Los clientes llegan según un proceso de Poisson con una tasa media de 10 clientes por hora. La distribución de Poisson describe el número de eventos que ocurren
-             en un intervalo de tiempo dado, dado un promedio constante de ocurrencias y eventos independientes.
+            El ejercio no nos da valores para el tiempo que se tarda en cargar o descargar los productos del camion, sin embargo al ser estos necesarios se colocan valores de estos para completar una buena simulacion.
         </p>
     </div>
-
-    {{-- <h2>Detalles de la simulacion</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Tiempo(minutos)</th>
-                    <th>Evento</th>
-                    <th>Espacios Libres</th>
-                    <th>Espacios Ocupados</th>
-                    <th>Cliente Perdido</th>
-                </tr>
-            </thead>
-            <tbody id="tablaIteracion">
-                @foreach ($iteraciones as $iteracion)
-                    <tr>
-                        <td>{{ $iteracion['time'] }}</td>
-                        <td>{{ $iteracion['event'] }}</td>
-                        <td>{{ $iteracion['available_spaces'] }}</td>
-                        <td>{{ $iteracion['occupied_spaces'] }}</td>
-                        <td>{{ $iteracion['lost_customers'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
     <br>
     <h1>Cantidad de Dias</h1>
     <p id="iteraciones">{{ $diasSimulados }}</p>
@@ -155,23 +136,40 @@
     <br>
     <h1>Costo vs. Numero de camiones</h1>
     <canvas id="graficoNumCamiones" width="150" height="200"></canvas>
-    <h1>Grafico distribucion exponencial</h1>
-    <canvas id="graficoExponencial" width="150" height="200" style="margin-top: 20px;"></canvas>
-    <h1>Grafico distribucion uniforme</h1>
-    <canvas id="graficoUniforme" width="150" height="200" style="margin-top: 20px;"></canvas>
-
-    <br>
-    <div class="botones">
-        <a href="{{route('ej3.edit')}}" class="btn btn-primary">Personalizar problema</a>
-        @if (isset($datos))
-            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
-        @else
-            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
-        @endif
+    <br>   
+    <h2>Tabla de Paso de los dias</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Dia</th>
+                    <th>Produccion</th>
+                    <th>Numero de Camiones</th>
+                    <th>Cantidad Transportada (ton)</th>
+                </tr>
+            </thead>
+            <tbody id="tablaIteracion">
+                @foreach ($transporteDia as $transporteDelDia)
+                    <tr>
+                        <td>{{ $transporteDelDia['dia'] }}</td>
+                        <td>{{ $prodDia[$transporteDelDia['dia']-1] }}</td>
+                        <td>{{ $transporteDelDia['camiones'] }}</td>
+                        <td>{{ $transporteDelDia['transportado'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
     <br>
-    <h2>Funcion de distribucion exponencial</h2>
-    <p>$$F(x) = -\frac{\log(1 - \lambda)}{k} $$</p>
+    
+    <div class="botones">
+        <a href="{{route('ej4.edit')}}" class="btn btn-primary">Personalizar problema</a>
+        <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
+    </div>
+    <br>
+
+    <h2>Formula de Distribucion Uniforme</h2>
+    <p>$$ F(R) = a + (b - a)R $$</p>
 
     {{-- Formulario para simular nuevamente --}}
     <form class="formEj3" id="formEj3" action="" method="get" style="display: none;">

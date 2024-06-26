@@ -19,7 +19,7 @@
 
 /* tabla */
 .table-responsive{
-    height: 600px;
+    max-height: 600px;
 }
 /* termina tabla */
 
