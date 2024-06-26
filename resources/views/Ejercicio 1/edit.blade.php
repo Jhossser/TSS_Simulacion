@@ -23,21 +23,25 @@
     <div class="formEj3" >
         
         <div class="form-group">
-            <label for="tasaLlegada">Numero de Cajeros</label>
-            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese el numero de cajeros" >
+            <label for="tasaLlegada">Clientes por hora </label>
+            <input class="form-control" type="number" name="tasaLlegada" id="tasaLlegada" placeholder="Ingrese el numero de clientes" >
             
         </div>
         <div class="form-group">
-            <label for="tasaServicio">Clientes por hora</label>
-            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese el numero de clientes por hora" >
+            <label for="tasaServicio">Tiempo de servicio por persona</label>
+            <input class="form-control" type="number" name="tasaServicio" id="tasaServicio" placeholder="Ingrese el tiempo de servicio" >
             
         </div>
         <div class="form-group">
-            <label for="capacidad">Tiempo maximo del cliente en el cajero</label>
-            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese el tiempo del cliente en el cajero" >
+            <label for="capacidad">Tiempo maximo del cliente en la segunda estacion</label>
+            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese el tiempo maximo en la estacion" >
         
         </div>
+        <div class="form-group">
+            <label for="capacidad">Tiempo minimo del cliente en la segunda estacion</label>
+            <input class="form-control" type="number" name="capacidad" id="capacidad" placeholder="Ingrese el tiempo minimo en la estacion" >
         
+        </div>
         <div class="margenAbajo" id="masInfo">
             <p onclick="masInfo()">Mas infomacion <i class="fas fa-caret-down" id="flechaInfo"></i></p>
         </div>
