@@ -42,16 +42,16 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="contraseña">Contraseña</label>
-                        <input type="password" class="form-control" type="number" name="contraseña" id="contraseña" placeholder="Ingrese su contraseña" value="">
-                        @error('contraseña')
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" type="number" name="password" id="password" placeholder="Ingrese su contraseña" value="">
+                        @error('password')
                             <span class="text-danger">*{{$message}}</span>
                         @enderror
                     </div>
                     <br>
                     <div class="btnIniciar">
                         <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
-                        <button type="button" class="btn btn-secondary">Registrarse</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location='{{route('usuario.registro')}}'">Registrarse</button>
                     </div>
                 </form>
             </div>
