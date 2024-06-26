@@ -69,6 +69,8 @@
         @endif
     </div>
     <br>
+    <h2>Funcion de distribucion exponencial</h2>
+    <p>$$F(x) = -\frac{\log(1 - \lambda)}{k} $$</p>
 @endsection
 
 @section('script')

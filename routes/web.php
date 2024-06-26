@@ -39,7 +39,7 @@ Route::get('/ejercicio5/index',[ejercicio5Controller::class, 'index'])->name('ej
 Route::get('/ejercicio5/edit',[ejercicio5Controller::class, 'edit'])->name('ej5.edit');
 Route::get('/ejercicio5/update',[ejercicio5Controller::class, 'update'])->name('ej5.update');
 
-Route::get('/ejercicio6/index',[ejercicio6Controller::class, 'index'])->name('ej6.index');
-Route::get('/ejercicio6/edit',[ejercicio6Controller::class, 'edit'])->name('ej6.edit');
-Route::get('/ejercicio6/update',[ejercicio6Controller::class, 'update'])->name('ej6.update');
+Route::get('/ejercicio6/index', [ejercicio6Controller::class, 'index'])->name('ej6.index');
+Route::get('/ejercicio6/edit', [ejercicio6Controller::class, 'edit'])->name('ej6.edit');
+Route::post('/ejercicio6/update', [ejercicio6Controller::class, 'update'])->name('ej6.update');
 
