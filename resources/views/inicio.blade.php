@@ -14,8 +14,8 @@
         <a href="{{route('ej1.index')}}" class="opcion">Estacion de Servicio</a>
         <a href="" class="opcion">Cajeros</a>
         <a href="{{route('ej3.index')}}" class="opcion">Estacionamiento</a>
-        <a href="" class="opcion">Transporte de Productos</a>
-        <a href="" class="opcion">Reparacion de maquinaria</a>
-        <a href="" class="opcion">Reabastecimiento</a>
+        <a href="{{ route('ej4.index') }}" class="opcion">Transporte de Productos</a>
+        <a href="{{ route('ej5.index') }}" class="opcion">Reparacion de maquinaria</a>
+        <a href="{{ route('ej6.index') }}" class="opcion">Reabastecimiento</a>
     </div>
 @endsection
