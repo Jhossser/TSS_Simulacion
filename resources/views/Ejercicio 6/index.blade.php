@@ -105,6 +105,59 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
     <!-- Gráfico comparativo -->
     <h3>Comparación de Tiempos de Servicio</h3>
     <canvas id="graficoComparacion" width="400" height="200"></canvas>
+    <br>
+    <p class="parrafo" style="text-align: justify;">
+        para esta simulacion se le aplica el siguiente trato a la funcion de origen de la distribucion y que esta pueda darse atraves de una variable de 0 a 1
+        por el metodo de la transformada inversa que genera el valor acumulado de probabilidad q tiene cada funcion la funcion acumulada se optiene a traves de una integral
+        que transforma a la funcion de densidad(casos probables k)a su forma acumulada lo cual nos da eventos simulados atraves de la probabilidad acumulada de dichos eventos.
+    </p>
+    <h2>Distribución de Poisson</h2>
+    <div style="display: flex; justify-content: space-around;">
+        <div style="width: 30%;">
+            <p>Función de Densidad de Probabilidad (pdf):</p>
+            $$ P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!} $$
+        </div>
+        <div style="width: 30%;">
+            <p>Función de Distribución Acumulada (cdf):</p>
+            $$ P(X \le k) = e^{-\lambda} \sum_{i=0}^k \frac{\lambda^i}{i!} $$
+            <p>Para \( t \) y \( t + \Delta t \):</p>
+            $$ P(T \le t + \Delta t) = 1 - e^{-\lambda (t + \Delta t)} $$
+        </div>
+        <div style="width: 30%;">
+            <p>Transformada Inversa:</p>
+            $$ T = -\frac{1}{\lambda} \ln(1 - U) $$
+        </div>
+    </div>
+
+    <h2>Distribución Uniforme</h2>
+    <div style="display: flex; justify-content: space-around;">
+        <div style="width: 30%;">
+            <p>Función de Densidad de Probabilidad (pdf):</p>
+            $$ 
+            f(x) = 
+            \begin{cases} 
+            \frac{1}{b-a} & \text{si } a \le x \le b \\
+            0 & \text{en otro caso}
+            \end{cases} 
+            $$
+        </div>
+        <div style="width: 30%;">
+            <p>Función de Distribución Acumulada (cdf):</p>
+            $$ 
+            F(x) = 
+            \begin{cases} 
+            0 & \text{si } x < a \\
+            \frac{x-a}{b-a} & \text{si } a \le x \le b \\
+            1 & \text{si } x > b
+            \end{cases} 
+            $$
+        </div>
+        <div style="width: 30%;">
+            <p>Transformada Inversa:</p>
+            $$ X = a + (b - a)U $$
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
