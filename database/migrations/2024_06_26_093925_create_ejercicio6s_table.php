@@ -18,14 +18,6 @@ class CreateEjercicio6sTable extends Migration
             $table->integer('idUsuario');
             $table->integer('tasaLlegada');
             $table->integer('numEquipos');
-            $table->integer('tminE1');
-            $table->integer('tminE2');
-            $table->integer('tminE3');
-            $table->integer('tminE4');
-            $table->integer('tmaxE1');
-            $table->integer('tmaxE2');
-            $table->integer('tmaxE3');
-            $table->integer('tmaxE4');
             $table->timestamps();
         });
     }

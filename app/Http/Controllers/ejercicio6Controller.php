@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ejercicio6;
+use App\Models\equipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Ejercicio6Controller extends Controller
 {
@@ -13,6 +16,27 @@ class Ejercicio6Controller extends Controller
         $minTiemposServicio = $request->input('minTiempoServicio', [20, 15, 10, 5]); // Tiempos mínimos de servicio en minutos
         $maxTiemposServicio = $request->input('maxTiempoServicio', [30, 25, 20, 15]); // Tiempos máximos de servicio en minutos
     
+        if(isset($request->lambda) || isset($request->numEquipos) || isset($request->minTiempoServicio) || isset($request->maxTiempoServicio)){
+            $userId = Auth::id();
+    
+            //guardando historial
+            $ej6 = new ejercicio6();
+            $ej6->idUsuario = $userId;
+            $ej6->tasaLlegada = $lambda;
+            $ej6->numEquipos = $numEquipos;
+            $ej6->save();
+
+            for ($j = 0; $j < $numEquipos; $j++) {
+                $equipo = new equipo();
+                $equipo->idEjercicio6 = $ej6->id;
+                $equipo->numEquipo = $j+1;
+                $equipo->min = $minTiemposServicio[$j];
+                $equipo->max = $maxTiemposServicio[$j];
+                $equipo->save();
+            }
+        }
+
+
         $tiempoSimulacion = 8 * 60; // Tiempo de simulación en minutos
     
         // Generar tiempos de llegada de camiones (proceso de Poisson)
@@ -64,14 +88,22 @@ class Ejercicio6Controller extends Controller
     private function generateTeamsServiceTimes($numEquipos, $minTiemposServicio, $maxTiemposServicio, $cantidadCamiones)
     {
         $teamsResults = [];
-        for ($team = 1; $team <= $numEquipos; $team++) {
+        for ($team = 0; $team < $numEquipos; $team++) {
+            
             $serviceTimes = [];
             for ($i = 0; $i < $cantidadCamiones; $i++) {
-                $serviceTimes[] = rand($minTiemposServicio[$team - 1], $maxTiemposServicio[$team - 1]);
+                $serviceTimes[] = rand($minTiemposServicio[$team], $maxTiemposServicio[$team]);
             }
-            $teamsResults[$team] = ['serviceTimes' => $serviceTimes];
+            $teamsResults[] = ['serviceTimes' => $serviceTimes];
+            // print_r($serviceTimes);
         }
         return $teamsResults;
+    }
+
+    public function hist(ejercicio6 $hist){
+        $equipos = equipo::where('idEjercicio6', $hist->id)->get();
+
+        return view('Ejercicio 6.edit', compact('hist','equipos'));
     }
 }
 

@@ -2,6 +2,7 @@
 
 @section('links')
     <link rel="stylesheet" href="../../css/inicio.css">
+    <link rel="stylesheet" href="../../css/historial.css">
 @endsection
 
 @section('titulo', 'Mobile Simu')
@@ -204,14 +205,6 @@
                 <tr>
                     <th>Tasa llegada</th>
                     <th>Numero Equipos</th>
-                    <th>Tiempo min. Eq.1</th>
-                    <th>Tiempo min. Eq.2</th>
-                    <th>Tiempo min. Eq.3</th>
-                    <th>Tiempo min. Eq.4</th>
-                    <th>Tiempo max. Eq.1</th>
-                    <th>Tiempo max. Eq.2</th>
-                    <th>Tiempo max. Eq.3</th>
-                    <th>Tiempo max. Eq.4</th>
                 </tr>
             </thead>
             <tbody id="tablaIteracion">
@@ -219,33 +212,85 @@
                     <tr>
                         <td class="alert alert-primary">Sin</td>
                         <td class="alert alert-primary">registros.</td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
-                        <td class="alert alert-primary"></td>
                     </tr>
                 @else
                     @foreach ($ej6 as $item)
                         <tr>
                             <td>{{$item->tasaLlegada}}</td>
                             <td>{{$item->numEquipos}}</td>
-                            <td>{{$item->tminE1}}</td>
-                            <td>{{$item->tminE2}}</td>
-                            <td>{{$item->tminE3}}</td>
-                            <td>{{$item->tminE4}}</td>
-                            <td>{{$item->tmaxE1}}</td>
-                            <td>{{$item->tmaxE2}}</td>
-                            <td>{{$item->tmaxE3}}</td>
-                            <td>{{$item->tmaxE4}}</td>
-                            <td><a href="{{route('ej6.hist', $item)}}" class="btn btn-primary">Simular</a></td>
+                            <td>
+                                <button class="btn btn-info" onclick="equipos({{$item->id}})">Equipos</button>
+                                <a href="{{route('ej6.hist', $item)}}" class="btn btn-primary">Simular</a>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
             </tbody>
         </table>
     </div>
+
+    {{-- tabla de equipos --}}
+    @foreach ($ej6 as $item)
+        {{-- <div class="modal-fade" id="{{$item->id}}">
+            
+        </div> --}}
+
+
+
+        <div class="modal fade" id="{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title" id="labelTitulo">Equipos de Ejercicio 6 - {{$item->id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    @foreach ($item->equipos as $equipo)
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Numero de equipo</th>
+                                        <th>Tiempo min. Eq. {{$equipo->numEquipo}}</th>
+                                        <th>Tiempo max. Eq. {{$equipo->numEquipo}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaIteracion">
+                                    @if($item->equipos->isEmpty())
+                                        <tr>
+                                            <td class="alert alert-primary">Sin</td>
+                                            <td class="alert alert-primary">registros.</td>
+                                            <td class="alert alert-primary"></td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td>{{$equipo->numEquipo}}</td>
+                                            <td>{{$equipo->min}}</td>
+                                            <td>{{$equipo->max}}</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+    
+                  </div>
+                  <div class="modal-footer">
+                    <button id="btnCancelar" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+@endsection
+
+@section('script')
+    <script>
+        function equipos(id){
+            $('#'+id).modal('toggle');
+        }
+    </script>
+    
 @endsection

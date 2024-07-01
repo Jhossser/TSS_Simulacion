@@ -20,24 +20,38 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
 ¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo
     </p>
     <br>
-    <form action="{{ route('ej6.index') }}" method="GET">
+    <form action="{{ route('ej6.index') }}" method="GET" style="width: 100%;">
         <div class="form-group">
             <label for="lambda">Tasa media de llegada de camiones por hora (λ):</label>
-            <input type="number" name="lambda" id="lambda" class="form-control" required>
+            <input type="number" name="lambda" id="lambda" class="form-control" required value="{{old('lambda',$hist->tasaLlegada ?? '')}}">
         </div>
         <div class="form-group" style="display: none;">
             <label for="numEquipos">Número de equipos:</label>
-            <input type="number" name="numEquipos" id="numEquipos" class="form-control" required value="1">
+            <input type="number" name="numEquipos" id="numEquipos" class="form-control" required value="{{$hist->numEquipos ?? '1'}}">
         </div>
         <div id="equipos-container">
-            <div class="form-group">
-                <label for="minTiempoServicio">Tiempo mínimo de servicio (equipo 1):</label>
-                <input type="number" name="minTiempoServicio[]" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="maxTiempoServicio">Tiempo máximo de servicio (equipo 1):</label>
-                <input type="number" name="maxTiempoServicio[]" class="form-control" required>
-            </div>
+            @if (isset($hist))
+                @foreach ($equipos as $equipo)   
+                    <div class="form-group">
+                        <label for="minTiempoServicio">Tiempo mínimo de servicio (equipo {{$equipo->numEquipo}}):</label>
+                        <input type="number" name="minTiempoServicio[]" class="form-control" required value="{{$equipo->min}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="maxTiempoServicio">Tiempo máximo de servicio (equipo {{$equipo->numEquipo}}):</label>
+                        <input type="number" name="maxTiempoServicio[]" class="form-control" required value="{{$equipo->max}}">
+                    </div>
+                @endforeach
+            @else    
+                <div class="form-group">
+                    <label for="minTiempoServicio">Tiempo mínimo de servicio (equipo 1):</label>
+                    <input type="number" name="minTiempoServicio[]" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="maxTiempoServicio">Tiempo máximo de servicio (equipo 1):</label>
+                    <input type="number" name="maxTiempoServicio[]" class="form-control" required>
+                </div>
+            @endif
+
         </div>
         <button type="button" id="agregar-equipo" class="btn btn-secondary">Agregar equipo</button>
         <button type="submit" class="btn btn-primary">Simular</button>

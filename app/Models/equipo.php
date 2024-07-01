@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ejercicio6 extends Model
+class equipo extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    function equipos(){
-        return $this->hasMany('App\Models\equipo', 'idEjercicio6', 'id');
+    public function problema()
+    {
+        return $this->belongsTo('App\Models\ejercicio6', 'idEjercicio6', 'id');
     }
 }

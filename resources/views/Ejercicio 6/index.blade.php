@@ -55,7 +55,7 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
     <h3>Tiempos de Servicio de Equipos</h3>
     @foreach ($teamsResults as $team => $result)
         <div class="table-responsive">
-            <h4>Equipo {{ $team }}</h4>
+            <h4>Equipo {{ $team+1 }}</h4>
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
