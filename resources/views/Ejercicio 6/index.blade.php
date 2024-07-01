@@ -76,8 +76,11 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
     @endforeach
 
     <!-- Gráfico comparativo -->
-    <h3>Comparación de Tiempos de Servicio</h3>
-    <canvas id="graficoComparacion" width="400" height="200"></canvas>
+    <div class="exGrafico">
+        {{-- <button class="btn btn-info" id="btnExpandir" onclick="crecer()"><i class="fas fa-expand"></i></button> --}}
+        <h1>Comparación de Tiempos de Servicio</h1>
+    </div>
+    <canvas id="graficoComparacion" width="150" height="200"></canvas>
 @endsection
 
 @section('script')
@@ -101,6 +104,10 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
 
         function rehacer() {
             window.location.reload();
+        }
+
+        function crecer() {
+            //$('#graficoComparacion').addClass('fullscreen');
         }
     </script>
 @endsection

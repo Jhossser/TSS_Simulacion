@@ -1,0 +1,18 @@
+#btnExpandir{
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    padding: 3px 6px;
+}
+
+.exGrafico{
+    position: relative;
+    width: 100%;
+}
+
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f5f6f7;
+}
