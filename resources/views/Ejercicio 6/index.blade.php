@@ -21,13 +21,40 @@ el equipo está formado por 5 trabajadores, el tiempo de servicio esta uniformem
 entre 10 y 20 minutos y si el equipo está formado por 6 trabajadores, el tiempo de servicio esta
 uniformemente distribuido entre 5 y 15 minutos. Cada trabajador recibe $25 por hora durante el
 turno nocturno de ocho horas. El costo de tener un camión esperando se estima en $50 por hora.
-¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo
     </p>
+    <ul class="lista">
+    <li>¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo?/li>
+</ul>
     <br>
     <!-- Botones -->
     <div class="botones">
         <a href="{{ route('ej6.edit') }}" class="btn btn-primary">Personalizar problema</a>
         <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
+    </div>
+
+    <!-- Recuadro de costos -->
+    <h3>Costos de Equipos y Espera de Camiones</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Equipo</th>
+                    <th>Costo de Equipo (Bs/hora)</th>
+                    <th>Costo de Espera (Bs/hora)</th>
+                    <th>Costo Total (Bs/hora)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($costosEquipos as $costo)
+                    <tr>
+                        <td>{{ $costo['equipo'] }}</td>
+                        <td>{{ $costo['costoEquipo'] }}</td>
+                        <td>{{ $costo['costoEsperando'] }}</td>
+                        <td>{{ $costo['costoTotal'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <!-- Tabla de tiempos de llegada de camiones -->
@@ -104,4 +131,3 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
         }
     </script>
 @endsection
-

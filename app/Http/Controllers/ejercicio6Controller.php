@@ -16,16 +16,17 @@ class Ejercicio6Controller extends Controller
         $minTiemposServicio = $request->input('minTiempoServicio', [20, 15, 10, 5]); // Tiempos mínimos de servicio en minutos
         $maxTiemposServicio = $request->input('maxTiempoServicio', [30, 25, 20, 15]); // Tiempos máximos de servicio en minutos
     
+        // Guardar historial si hay parámetros personalizados
         if(isset($request->lambda) || isset($request->numEquipos) || isset($request->minTiempoServicio) || isset($request->maxTiempoServicio)){
             $userId = Auth::id();
     
-            //guardando historial
+            // Guardando historial
             $ej6 = new ejercicio6();
             $ej6->idUsuario = $userId;
             $ej6->tasaLlegada = $lambda;
             $ej6->numEquipos = $numEquipos;
             $ej6->save();
-
+    
             for ($j = 0; $j < $numEquipos; $j++) {
                 $equipo = new equipo();
                 $equipo->idEjercicio6 = $ej6->id;
@@ -35,8 +36,7 @@ class Ejercicio6Controller extends Controller
                 $equipo->save();
             }
         }
-
-
+    
         $tiempoSimulacion = 8 * 60; // Tiempo de simulación en minutos
     
         // Generar tiempos de llegada de camiones (proceso de Poisson)
@@ -45,6 +45,9 @@ class Ejercicio6Controller extends Controller
         // Generar tiempos de servicio para cada equipo
         $teamsResults = $this->generateTeamsServiceTimes($numEquipos, $minTiemposServicio, $maxTiemposServicio, count($arrivalTimes));
     
+        // Calcular costos
+        $costosEquipos = $this->calculateTeamCosts($numEquipos, $arrivalTimes, $teamsResults);
+        
         // Generar datos para el gráfico comparativo
         $labels = array_map(function ($i) { return "Camión " . ($i + 1); }, array_keys($arrivalTimes));
         $datasets = [];
@@ -62,9 +65,41 @@ class Ejercicio6Controller extends Controller
             'arrivalTimes' => $arrivalTimes,
             'teamsResults' => $teamsResults,
             'labels' => $labels,
-            'datasets' => $datasets
+            'datasets' => $datasets,
+            'costosEquipos' => $costosEquipos
         ]);
     }
+    
+    private function calculateTeamCosts($numEquipos, $arrivalTimes, $teamsResults)
+    {
+        $costoPorPersonaPorHora = 25;
+        $costoCamionEsperandoPorHora = 50;
+        $costosEquipos = [];
+    
+        foreach ($teamsResults as $team => $result) {
+            $numeroPersonas = $team + 1;
+            $costoEquipo = $numeroPersonas * $costoPorPersonaPorHora;
+    
+            $costoEsperando = 0;
+            $totalTiempoEspera = 0;
+            for ($i = 1; $i < count($arrivalTimes); $i++) {
+                $tiempoEspera = max(0, $arrivalTimes[$i] - $arrivalTimes[$i-1] - $result['serviceTimes'][$i-1]);
+                $totalTiempoEspera += $tiempoEspera;
+            }
+    
+            $costoEsperando = $totalTiempoEspera / 60 * $costoCamionEsperandoPorHora;
+    
+            $costosEquipos[] = [
+                'equipo' => $numeroPersonas,
+                'costoEquipo' => $costoEquipo,
+                'costoEsperando' => $costoEsperando,
+                'costoTotal' => $costoEquipo + $costoEsperando
+            ];
+        }
+    
+        return $costosEquipos;
+    }
+    
 
     public function edit()
     {
