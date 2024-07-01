@@ -90,14 +90,16 @@
             <p onclick="masInfo()">Mas infomacion <i class="fas fa-caret-down" id="flechaInfo"></i></p>
         </div>
         <div class="margenAbajo" id="informacion">
-            <h2>Tasa de llegada</h2>
-            <p>La tasa de llegada (λ) se refiere a la frecuencia con la que los clientes llegan al estacionamiento. En el contexto de nuestro modelo, esta tasa se mide en clientes por hora.</p>
-            <h2>Tasa de servicio</h2>
-            <p>La tasa de servicio (μ) representa la rapidez con la que los espacios de estacionamiento se liberan, es decir, el tiempo que cada auto permanece estacionado. Se mide en términos de "servicios" por hora.</p>
-            <h2>Capacidad del estacionamiento</h2>
-            <p>La capacidad del estacionamiento es el número total de espacios disponibles en el estacionamiento.</p>
-            <h2>Tiempo de simulacion</h2>
-            <p>El tiempo de simulación es la duración total durante la cual se lleva a cabo la simulación. Este tiempo se mide en minutos u horas, según el contexto.</p>
+            <h2>Velocidad de Camion</h2>
+            <p>velocidad promedio de los camiones a los que se los quiera poner en simulacion.</p>
+            <h2>Distancia entre fabrica y almacen</h2>
+            <p>Distancia a la que los camiones se pondran a prueba durante la simulacion.</p>
+            <h2>Tiempo en carga,Tiempo en descargar</h2>
+            <p>Eficiencia de atencion en los dos puntos que sirve para poder obtener el tiempo total para cada entrega.</p>
+            <h2>Jornada laboral</h2>
+            <p>Limite de tiempo para hacer el translado de la carga diaria.</p>
+            <h2>Costo de transportar producto exedente,Costo anual de camion</h2>
+            <p>Costo que sirve como variable principal para la resolucion de que eleccion es mejor.</p>
         </div>
         <button type="submit" class="btn btn-primary">Resolver</button>
         <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej4.index')}}'">Cancelar</button>

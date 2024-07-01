@@ -46,7 +46,7 @@
             <h2>Clientes por hora</h2>
             <p> La media de clientes  atendidos (λ) se refiere a la frecuencia con la que los clientes llegan a los cajeros. En el contexto de nuestro modelo, esta tasa se mide en clientes por hora. </p>
             <h2>Tiempo maximo del cliente en el cajero</h2>
-            <p>-------(μ)</p>
+            <p>Maximo de tiempo q tarda un cliente en ser atendido dado por una distribucion unifor q siempre empiesa con minimo de 0</p>
             </div>
         <button type="submit" class="btn btn-primary"  id="Calcular">Actualizar</button>
         <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej2.index')}}'">Cancelar</button>
