@@ -31,7 +31,13 @@
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej1->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej1 as $item)
                         <tr>
@@ -61,7 +67,11 @@
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej2->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej2 as $item)
                         <tr>
@@ -89,7 +99,12 @@
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej3->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej3 as $item)
                         <tr>
@@ -121,7 +136,15 @@
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej4->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej4 as $item)
                         <tr>
@@ -153,7 +176,12 @@
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej5->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej5 as $item)
                         <tr>
@@ -169,34 +197,55 @@
         </table>
     </div>
     <br>
-    {{-- <h2>Ejercicio 6</h2>
+    <h2>Ejercicio 6</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>lambda</th>
-                    <th>Media Estacion 1</th>
-                    <th>Min estacion 2</th>
-                    <th>Max estacion 2</th>
-                    <th>Numero Clientes</th>
+                    <th>Tasa llegada</th>
+                    <th>Numero Equipos</th>
+                    <th>Tiempo min. Eq.1</th>
+                    <th>Tiempo min. Eq.2</th>
+                    <th>Tiempo min. Eq.3</th>
+                    <th>Tiempo min. Eq.4</th>
+                    <th>Tiempo max. Eq.1</th>
+                    <th>Tiempo max. Eq.2</th>
+                    <th>Tiempo max. Eq.3</th>
+                    <th>Tiempo max. Eq.4</th>
                 </tr>
             </thead>
             <tbody id="tablaIteracion">
                 @if($ej6->isEmpty())
-                    <tr>No hay registros.</tr>
+                    <tr>
+                        <td class="alert alert-primary">Sin</td>
+                        <td class="alert alert-primary">registros.</td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                        <td class="alert alert-primary"></td>
+                    </tr>
                 @else
                     @foreach ($ej6 as $item)
                         <tr>
-                            <td>{{$item->lambda}}</td>
-                            <td>{{$item->mediaEst1}}</td>
-                            <td>{{$item->minEst2}}</td>
-                            <td>{{$item->maxEst2}}</td>
-                            <td>{{$item->numClientes}}</td>
+                            <td>{{$item->tasaLlegada}}</td>
+                            <td>{{$item->numEquipos}}</td>
+                            <td>{{$item->tminE1}}</td>
+                            <td>{{$item->tminE2}}</td>
+                            <td>{{$item->tminE3}}</td>
+                            <td>{{$item->tminE4}}</td>
+                            <td>{{$item->tmaxE1}}</td>
+                            <td>{{$item->tmaxE2}}</td>
+                            <td>{{$item->tmaxE3}}</td>
+                            <td>{{$item->tmaxE4}}</td>
                             <td><a href="{{route('ej6.hist', $item)}}" class="btn btn-primary">Simular</a></td>
                         </tr>
                     @endforeach
                 @endif
             </tbody>
         </table>
-    </div> --}}
+    </div>
 @endsection
