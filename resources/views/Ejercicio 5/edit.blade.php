@@ -60,14 +60,12 @@
             <p onclick="masInfo()">Mas infomacion <i class="fas fa-caret-down" id="flechaInfo"></i></p>
         </div>
         <div class="margenAbajo" id="informacion">
-            <h2>Tasa de llegada</h2>
-            <p>La tasa de llegada (λ) se refiere a la frecuencia con la que los clientes llegan al estacionamiento. En el contexto de nuestro modelo, esta tasa se mide en clientes por hora.</p>
-            <h2>Tasa de servicio</h2>
-            <p>La tasa de servicio (μ) representa la rapidez con la que los espacios de estacionamiento se liberan, es decir, el tiempo que cada auto permanece estacionado. Se mide en términos de "servicios" por hora.</p>
-            <h2>Capacidad del estacionamiento</h2>
-            <p>La capacidad del estacionamiento es el número total de espacios disponibles en el estacionamiento.</p>
-            <h2>Tiempo de simulacion</h2>
-            <p>El tiempo de simulación es la duración total durante la cual se lleva a cabo la simulación. Este tiempo se mide en minutos u horas, según el contexto.</p>
+            <h2>Número de Simulaciones</h2>
+            <p>cantida de fallas simuladas de maquinarias.</p>
+            <h2>Numero de operarios</h2>
+            <p>cantida de operarios a los cuales se les dividiran las maquinarias.</p>
+            <h2>Costo maquina ociosa, Salario de operador</h2>
+            <p>Costo que fijan la variable principal que da resolucion al problema de cuantas maquinas se le deben asignar a cada operario.</p>
         </div>
         <button type="submit" class="btn btn-primary">Resolver</button>
         <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej5.index')}}'">Cancelar</button>

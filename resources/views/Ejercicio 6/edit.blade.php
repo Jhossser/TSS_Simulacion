@@ -2,6 +2,11 @@
 
 @section('titulo', 'Personalizar Problema de Reabastecimiento')
 
+@section('links')
+    <link rel="stylesheet" href="../../css/ejercicio4.css">
+    <link rel="stylesheet" href="../../css/ejercicio3.css">
+@endsection
+
 @section('contenido')
     <h1>Personalizar Problema de Reabastecimiento</h1>
     <img class="imgEst" src="../../Image/reabastecimiento.jpg" alt="Reabastecimiento">
@@ -53,11 +58,26 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
             @endif
 
         </div>
+
+    <div class="margenAbajo" id="masInfo">
+            <p onclick="masInfo()">Mas infomacion <i class="fas fa-caret-down" id="flechaInfo"></i></p>
+        </div>
+        <div class="margenAbajo" id="informacion">
+            <h2>Tasa media de llegada de camiones por hora</h2>
+            <p>La tasa de llegada (λ) se refiere a la frecuencia con la que los camiones llegan al almacenamiento. En el contexto de nuestro modelo, esta tasa se mide en camiones por hora.</p>
+            <h2>Numero de equipo</h2>
+            <p>EL numero equipos es para comparar la eficiencia de diversos equipos que tienen una diferencia que no afecta a la simulasion que marca que haya diferencia entre sus maximos y minimos.</p>
+            <h2>Max,Min</h2>
+            <p>Marcan el rango que entiende la distribucion uniforme que genera la eficiencia de cada equipo.</p>
+        </div>       
         <button type="button" id="agregar-equipo" class="btn btn-secondary">Agregar equipo</button>
         <button type="submit" class="btn btn-primary">Simular</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej6.index')}}'">Cancelar</button>
     </form>
+@endsection
 
-    <script>
+@section('script')
+<script>
         document.getElementById('agregar-equipo').addEventListener('click', function () {
             var equipoIndex = document.querySelectorAll('#equipos-container .form-group').length / 2 + 1;
             var container = document.getElementById('equipos-container');
@@ -80,4 +100,5 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
             $('#numEquipos').val(newValue);
         });
     </script>
+<script src="../../js/ej3.js"></script>
 @endsection

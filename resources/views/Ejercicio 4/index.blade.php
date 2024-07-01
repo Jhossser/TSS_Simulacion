@@ -168,8 +168,39 @@
     </div>
     <br>
 
-    <h2>Formula de Distribucion Uniforme</h2>
-    <p>$$ F(R) = a + (b - a)R $$</p>
+    <p class="parrafo" style="text-align: justify;">
+        para esta simulacion se le aplica el siguiente trato a la funcion de origen de la distribucion y que esta pueda darse atraves de una variable de 0 a 1
+        por el metodo de la transformada inversa que genera el valor acumulado de probabilidad q tiene cada funcion la funcion acumulada se optiene a traves de una integral
+        que transforma a la funcion de densidad(casos probables k)a su forma acumulada lo cual nos da eventos simulados atraves de la probabilidad acumulada de dichos eventos.
+    </p>
+    <h2>Distribución Uniforme</h2>
+    <div style="display: flex; justify-content: space-around;">
+        <div style="width: 30%;">
+            <p>Función de Densidad de Probabilidad (pdf):</p>
+            $$ 
+            f(x) = 
+            \begin{cases} 
+            \frac{1}{b-a} & \text{si } a \le x \le b \\
+            0 & \text{en otro caso}
+            \end{cases} 
+            $$
+        </div>
+        <div style="width: 30%;">
+            <p>Función de Distribución Acumulada (cdf):</p>
+            $$ 
+            F(x) = 
+            \begin{cases} 
+            0 & \text{si } x < a \\
+            \frac{x-a}{b-a} & \text{si } a \le x \le b \\
+            1 & \text{si } x > b
+            \end{cases} 
+            $$
+        </div>
+        <div style="width: 30%;">
+            <p>Transformada Inversa:</p>
+            $$ X = a + (b - a)U $$
+        </div>
+    </div>
 
     {{-- Formulario para simular nuevamente --}}
     <form class="formEj3" id="formEj3" action="" method="get" style="display: none;">
