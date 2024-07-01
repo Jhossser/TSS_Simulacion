@@ -62,11 +62,7 @@
 <br>
     <div class="botones">
         <a href="{{route('ej1.edit')}}" class="btn btn-primary">Personalizar problema</a>
-        @if (isset($datos))
-            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
-        @else
-            <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
-        @endif
+        <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
     </div>
     <br>
     <h2>Funcion de distribucion exponencial</h2>
@@ -97,6 +93,10 @@
             }
         }
     });
+
+    function rehacer() {
+            window.location.reload();
+    }
 </script>
 @endsection
 

@@ -18,7 +18,7 @@
         <div class="form-group">
             <label for="vc">Velocidad de Camion</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="vc" id="vc" placeholder="Ingrese tasa de llegada de vehiculos" value="{{old('vc',$hist->velocidad ?? '')}}">
+                <input class="form-control" type="number" name="vc" id="vc" value="{{old('vc',$hist->velocidad ?? '')}}">
                 <span>km/h</span>
             </div>
             @error('vc')
@@ -28,7 +28,7 @@
         <div class="form-group">
             <label for="d">Distancia entre fabrica y almacen</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="d" id="d" placeholder="Ingrese la tasa de servicio en horas" value="{{old('d',$hist->distancia ?? '')}}">
+                <input class="form-control" type="number" name="d" id="d" value="{{old('d',$hist->distancia ?? '')}}">
                 <span>km</span>
             </div>
             @error('d')
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label for="tc">Tiempo en carga</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="tc" id="tc" placeholder="Ingrese la tc del estacionamiento" value="{{old('tc',$hist->tiempoCarga ?? '')}}">
+                <input class="form-control" type="number" name="tc" id="tc" value="{{old('tc',$hist->tiempoCarga ?? '')}}">
                 <span>min</span>
             </div>
             @error('tc')
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="td">Tiempo en descargar</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="td" id="td" placeholder="Ingrese el tiempo en horas" value="{{old('td',$hist->tiempoDescarga ?? '')}}">
+                <input class="form-control" type="number" name="td" id="td" value="{{old('td',$hist->tiempoDescarga ?? '')}}">
                 <span>min</span>
             </div>
             @error('td')
@@ -58,7 +58,7 @@
         <div class="form-group">
             <label for="tt">Jornada laboral</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="tt" id="tt" placeholder="Ingrese el tiempo en horas" value="{{old('tt',$hist->jornada ?? '')}}">
+                <input class="form-control" type="number" name="tt" id="tt" value="{{old('tt',$hist->jornada ?? '')}}">
                 <span>hr</span>
             </div>
             @error('tt')
@@ -68,7 +68,7 @@
         <div class="form-group">
             <label for="ce">Costo de transportar producto exedente</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="ce" id="ce" placeholder="Ingrese el tiempo en horas" value="{{old('ce',$hist->costoExedente ?? '')}}">
+                <input class="form-control" type="number" name="ce" id="ce" value="{{old('ce',$hist->costoExedente ?? '')}}">
                 <span>Bs</span>
             </div>
             @error('ce')
@@ -78,7 +78,7 @@
         <div class="form-group">
             <label for="cac">Costo anual de camion</label>
             <div class="medidaInput">
-                <input class="form-control" type="number" name="cac" id="cac" placeholder="Ingrese el tiempo en horas" value="{{old('cac',$hist->costoAnualCamion ?? '')}}">
+                <input class="form-control" type="number" name="cac" id="cac" value="{{old('cac',$hist->costoAnualCamion ?? '')}}">
                 <span>Bs</span>
             </div>
             @error('cac')

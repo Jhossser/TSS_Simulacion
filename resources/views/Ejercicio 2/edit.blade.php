@@ -51,43 +51,44 @@
         <button type="submit" class="btn btn-primary"  id="Calcular">Actualizar</button>
         <button type="button" class="btn btn-secondary" onclick="window.location='{{route('ej2.index')}}'">Cancelar</button>
     </div>
-    <div class="actualizar" style="display:none;">
-    <h2>Detalles de la simulacion</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nro</th>
-                    <th>Clientes por hora</th>
-                    <th>Tiempo de llegada</th>
-                    <th>Tiempo de transaccion</th>
-                    <th>Tiempo final de transaccion</th>
-                    <th>Tiempo en sistemas</th>
-                    <th>Clientes en el sistema</th>
-                </tr>
-            </thead>
-            <tbody id="tablaIteracion">
-                
-            </tbody>
-        </table>
-    </div>
+    <br>
+    <div class="actualizar" style="display:none; width: 100%;">
+        <h2>Detalles de la simulacion</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nro</th>
+                        <th>Clientes por hora</th>
+                        <th>Tiempo de llegada</th>
+                        <th>Tiempo de transaccion</th>
+                        <th>Tiempo final de transaccion</th>
+                        <th>Tiempo en sistemas</th>
+                        <th>Clientes en el sistema</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaIteracion">
+                    
+                </tbody>
+            </table>
+        </div>
 
-    <h1>Cantidad de Eventos</h1>
-    <p id="iteraciones"></p>
-    <br>
-    <div class="ecuacion">
-        <h1>Estadisticas</h1>
-        <p id="promedioClientes">Cantidad promedio de Clientes: <span id="promCl"> </span></p>
-        <p id="tiempoPromedio">Tiempo promedio en el sistema: <span id="temP"></span></p>
+        <h1>Cantidad de Eventos</h1>
+        <p id="iteraciones"></p>
+        <br>
+        <div class="ecuacion">
+            <h1>Estadisticas</h1>
+            <p id="promedioClientes">Cantidad promedio de Clientes: <span id="promCl"> </span></p>
+            <p id="tiempoPromedio">Tiempo promedio en el sistema: <span id="temP"></span></p>
+        </div>
+        
+        {{-- Grafico --}}
+        <br>
+        <h1>Tiempo Promedio</h1>
+        <canvas id="graficoExponencial" width="150" height="200" style="margin-top: 20px;"></canvas>
+        <h1>Clientes promedio en el sistema</h1>
+        <canvas id="graficoUniforme" width="150" height="200" style="margin-top: 20px;"></canvas>
     </div>
-    
-    {{-- Grafico --}}
-    <br>
-    <h1>Tiempo Promedio</h1>
-    <canvas id="graficoExponencial" width="150" height="200" style="margin-top: 20px;"></canvas>
-    <h1>Clientes promedio en el sistema</h1>
-    <canvas id="graficoUniforme" width="150" height="200" style="margin-top: 20px;"></canvas>
-</div>
 @endsection
 
 

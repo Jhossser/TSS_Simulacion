@@ -13,7 +13,7 @@
     estación, el tiempo de servicio está uniformemente distribuido entre 1 y 2 minutos. Para esta información:
     </p>
     <br>
-<form action="{{ route('ej1.index') }}" method="GET">
+<form action="{{ route('ej1.index') }}" method="GET" style="width: 100%;">
     @csrf <!-- Esto se puede eliminar si se usa el método GET -->
     <div class="form-group">
         <label for="lambda">Lambda (clientes por hora):</label>
