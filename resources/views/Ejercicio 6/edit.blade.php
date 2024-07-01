@@ -25,9 +25,9 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
             <label for="lambda">Tasa media de llegada de camiones por hora (λ):</label>
             <input type="number" name="lambda" id="lambda" class="form-control" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             <label for="numEquipos">Número de equipos:</label>
-            <input type="number" name="numEquipos" id="numEquipos" class="form-control" required>
+            <input type="number" name="numEquipos" id="numEquipos" class="form-control" required value="1">
         </div>
         <div id="equipos-container">
             <div class="form-group">
@@ -56,6 +56,14 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
             maxTiempo.className = 'form-group';
             maxTiempo.innerHTML = `<label for="maxTiempoServicio">Tiempo máximo de servicio (equipo ${equipoIndex}):</label><input type="number" name="maxTiempoServicio[]" class="form-control" required>`;
             container.appendChild(maxTiempo);
+
+            let currentValue = parseInt($('#numEquipos').val());
+
+            // Incrementa el valor en 1
+            let newValue = currentValue + 1;
+
+            // Actualiza el valor del input
+            $('#numEquipos').val(newValue);
         });
     </script>
 @endsection

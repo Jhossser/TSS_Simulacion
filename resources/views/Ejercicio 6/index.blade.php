@@ -25,7 +25,7 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
     </p>
     <br>
     <!-- Botones -->
-    <div class="botones mb-4">
+    <div class="botones">
         <a href="{{ route('ej6.edit') }}" class="btn btn-primary">Personalizar problema</a>
         <button class="btn btn-secondary" onclick="rehacer()">Simular nuevamente</button>
     </div>

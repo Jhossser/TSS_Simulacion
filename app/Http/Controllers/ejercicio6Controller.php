@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class Ejercicio6Controller extends Controller
 {
@@ -42,21 +41,38 @@ class Ejercicio6Controller extends Controller
             'datasets' => $datasets
         ]);
     }
-    
 
-    
-    
-
-    
-        
     public function edit()
     {
-        return view('Ejercicio 6.edit', compact('lambda', 'numEquipos', 'minTiemposServicio', 'maxTiemposServicio'));
+        return view('Ejercicio 6.edit');
     }
 
-
+    private function generateArrivalTimes($lambda, $tiempoSimulacion)
+    {
+        $arrivalTimes = [];
+        $t = 0;
+        while ($t < $tiempoSimulacion) {
+            $u = mt_rand() / mt_getrandmax(); // Generar un número aleatorio uniforme entre 0 y 1
+            $t -= log(1 - $u) / $lambda * 60; // Tiempo hasta la siguiente llegada en minutos
+            if ($t < $tiempoSimulacion) {
+                $arrivalTimes[] = round($t, 2); // Añadir tiempo de llegada redondeado
+            }
+        }
+        return $arrivalTimes;
+    }
     
-
+    private function generateTeamsServiceTimes($numEquipos, $minTiemposServicio, $maxTiemposServicio, $cantidadCamiones)
+    {
+        $teamsResults = [];
+        for ($team = 1; $team <= $numEquipos; $team++) {
+            $serviceTimes = [];
+            for ($i = 0; $i < $cantidadCamiones; $i++) {
+                $serviceTimes[] = rand($minTiemposServicio[$team - 1], $maxTiemposServicio[$team - 1]);
+            }
+            $teamsResults[$team] = ['serviceTimes' => $serviceTimes];
+        }
+        return $teamsResults;
+    }
 }
 
 
