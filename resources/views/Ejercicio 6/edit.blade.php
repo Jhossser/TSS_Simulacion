@@ -1,14 +1,10 @@
 @extends('layout.plantilla')
 
-@section('titulo', 'Ejercicio 6 Personalizar')
-    
-@section('links')
-    <link rel="stylesheet" href="../../css/ejercicio6.css">
-@endsection
+@section('titulo', 'Personalizar Problema de Reabastecimiento')
 
 @section('contenido')
-    <h1>Problema de Reabastecimiento - Personalizar</h1>
-    <img class="imgEst" src="../../Image/reabastecimiento.jpg" alt="Colas de servicio">
+    <h1>Personalizar Problema de Reabastecimiento</h1>
+    <img class="imgEst" src="../../Image/reabastecimiento.jpg" alt="Reabastecimiento">
     <p class="parrafo" style="text-align: justify;">
     Una cadena de supermercados es abastecida por un almacén central. La mercancía que llega a
 este almacén es descargada en turnos nocturnos. Los camiones que se descargan en este almacén
@@ -24,49 +20,42 @@ turno nocturno de ocho horas. El costo de tener un camión esperando se estima e
 ¿El administrador del almacén desea saber cuál es el tamaño optimo del equipo
     </p>
     <br>
-    <form action="{{ route('ej6.update') }}" method="POST">
-        @csrf
+    <form action="{{ route('ej6.index') }}" method="GET">
         <div class="form-group">
-            <label for="lambda">Tasa media de llegada (λ):</label>
-            <input type="number" class="form-control" id="lambda" name="lambda" value="{{ old('lambda', 2) }}" step="0.1" required>
+            <label for="lambda">Tasa media de llegada de camiones por hora (λ):</label>
+            <input type="number" name="lambda" id="lambda" class="form-control" required>
         </div>
-
         <div class="form-group">
-            <label for="numEquipos">Número de Equipos:</label>
-            <input type="number" class="form-control" id="numEquipos" name="numEquipos" value="{{ old('numEquipos', 4) }}" min="1" required>
+            <label for="numEquipos">Número de equipos:</label>
+            <input type="number" name="numEquipos" id="numEquipos" class="form-control" required>
         </div>
-
-        <div id="equipos">
-            @for ($i = 1; $i <= old('numEquipos', 4); $i++)
-                <div class="form-group">
-                    <label>Equipo {{ $i }}</label>
-                    <input type="number" class="form-control" name="minTiempoServicio[]" placeholder="Tiempo mínimo de servicio (min)" value="{{ old('minTiempoServicio.' . ($i-1), 20) }}" required>
-                    <input type="number" class="form-control" name="maxTiempoServicio[]" placeholder="Tiempo máximo de servicio (min)" value="{{ old('maxTiempoServicio.' . ($i-1), 30) }}" required>
-                </div>
-            @endfor
+        <div id="equipos-container">
+            <div class="form-group">
+                <label for="minTiempoServicio">Tiempo mínimo de servicio (equipo 1):</label>
+                <input type="number" name="minTiempoServicio[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="maxTiempoServicio">Tiempo máximo de servicio (equipo 1):</label>
+                <input type="number" name="maxTiempoServicio[]" class="form-control" required>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="button" id="agregar-equipo" class="btn btn-secondary">Agregar equipo</button>
+        <button type="submit" class="btn btn-primary">Simular</button>
     </form>
-@endsection
 
-@section('script')
     <script>
-        document.getElementById('numEquipos').addEventListener('input', function() {
-            const numEquipos = this.value;
-            const equiposDiv = document.getElementById('equipos');
-            equiposDiv.innerHTML = '';
+        document.getElementById('agregar-equipo').addEventListener('click', function () {
+            var equipoIndex = document.querySelectorAll('#equipos-container .form-group').length / 2 + 1;
+            var container = document.getElementById('equipos-container');
+            var minTiempo = document.createElement('div');
+            minTiempo.className = 'form-group';
+            minTiempo.innerHTML = `<label for="minTiempoServicio">Tiempo mínimo de servicio (equipo ${equipoIndex}):</label><input type="number" name="minTiempoServicio[]" class="form-control" required>`;
+            container.appendChild(minTiempo);
 
-            for (let i = 1; i <= numEquipos; i++) {
-                const equipoDiv = document.createElement('div');
-                equipoDiv.className = 'form-group';
-                equipoDiv.innerHTML = `
-                    <label>Equipo ${i}</label>
-                    <input type="number" class="form-control" name="minTiempoServicio[]" placeholder="Tiempo mínimo de servicio (min)" value="20" required>
-                    <input type="number" class="form-control" name="maxTiempoServicio[]" placeholder="Tiempo máximo de servicio (min)" value="30" required>
-                `;
-                equiposDiv.appendChild(equipoDiv);
-            }
+            var maxTiempo = document.createElement('div');
+            maxTiempo.className = 'form-group';
+            maxTiempo.innerHTML = `<label for="maxTiempoServicio">Tiempo máximo de servicio (equipo ${equipoIndex}):</label><input type="number" name="maxTiempoServicio[]" class="form-control" required>`;
+            container.appendChild(maxTiempo);
         });
     </script>
 @endsection
