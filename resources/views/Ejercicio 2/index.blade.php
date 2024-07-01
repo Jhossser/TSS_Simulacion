@@ -26,7 +26,6 @@
     </div>
 
     <h2>Detalles de la simulacion</h2>
-    <h2>Detalles de la simulacion</h2>
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
@@ -61,7 +60,6 @@
     <canvas id="graficoExponencial" width="150" height="200" style="margin-top: 20px;"></canvas>
     <h1>Clientes promedio en el sistema</h1>
     <canvas id="graficoUniforme" width="150" height="200" style="margin-top: 20px;"></canvas>
-</div>
 <br>
 <p class="parrafo" style="text-align: justify;">
     para esta simulacion se le aplica el siguiente trato a la funcion de origen de la distribucion y que esta pueda darse atraves de una variable de 0 a 1
